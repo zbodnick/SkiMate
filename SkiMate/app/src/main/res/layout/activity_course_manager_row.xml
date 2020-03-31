@@ -4,50 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
+    app:cardCornerRadius="8dp
     <androidx.cardview.widget.CardView
+        app:cardCornerRadius="8dp"
         android:id="@+id/cardView"
-        android:layout_width="391dp"
-        android:layout_height="303dp"
+        android:layout_width="393dp"
+        android:layout_height="310dp"
         android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_view_layout"
-            android:layout_width="378dp"
-            android:layout_height="291dp"
+            android:layout_width="385dp"
+            android:layout_height="299dp"
             android:layout_margin="5dp">
 
             <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="384dp"
+                android:layout_height="195dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/ic_primary_background" />
+
+            <ImageView
                 android:id="@+id/course_thumbnail"
-                android:layout_width="356dp"
-                android:layout_height="169dp"
+                android:layout_width="353dp"
+                android:layout_height="176dp"
                 android:layout_centerVertical="true"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
+                android:background="@drawable/ic_course_map_placeholder"
+                android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.509"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.02"
-                app:srcCompat="@android:drawable/ic_menu_mapmode" />
+                app:layout_constraintVertical_bias="0.02" />
 
             <TextView
                 android:id="@+id/course_location"
                 android:layout_width="138dp"
                 android:layout_height="21dp"
-                android:src="@drawable/id_course"
                 android:text="Stub Canal"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/course_current_weather_icon"
-                app:layout_constraintHorizontal_bias="0.15"
+                app:layout_constraintHorizontal_bias="0.11"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_name"
                 app:layout_constraintVertical_bias="0.0" />
@@ -62,20 +75,23 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/course_current_weather_icon"
-                app:layout_constraintHorizontal_bias="0.228"
+                app:layout_constraintHorizontal_bias="0.174"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_thumbnail"
-                app:layout_constraintVertical_bias="0.173" />
+                app:layout_constraintVertical_bias="0.17" />
 
             <ImageButton
                 android:id="@+id/course_view_in_map"
                 android:layout_width="37dp"
                 android:layout_height="31dp"
+                android:layout_marginStart="18dp"
+                android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.994"
+                app:layout_constraintHorizontal_bias="0.944"
                 app:layout_constraintStart_toEndOf="@+id/course_location"
                 app:layout_constraintTop_toBottomOf="@+id/course_thumbnail"
+                app:layout_constraintVertical_bias="0.552"
                 app:srcCompat="@drawable/ic_arrow_right_24dp" />
 
             <TextView
@@ -89,35 +105,10 @@
                 android:textSize="26sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/course_raindrop_icon"
-                app:layout_constraintHorizontal_bias="0.652"
+                app:layout_constraintHorizontal_bias="0.785"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
-                app:layout_constraintVertical_bias="0.75" />
-
-            <TextView
-                android:id="@+id/course_wind_speed"
-                android:layout_width="58dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="2dp"
-                android:gravity="center_vertical"
-                android:text="10mph"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.559"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_location" />
-
-            <ImageView
-                android:id="@+id/course_wind_icon"
-                android:layout_width="26dp"
-                android:layout_height="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.437"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_location"
-                app:srcCompat="@drawable/ic_wind" />
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/course_rain_percent"
@@ -128,19 +119,46 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.323"
+                app:layout_constraintHorizontal_bias="0.297"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_location" />
+
+            <TextView
+                android:id="@+id/course_wind_speed"
+                android:layout_width="58dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="3dp"
+                android:gravity="center_vertical"
+                android:text="10mph"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.531"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/course_location" />
+
+            <ImageView
+                android:id="@+id/course_wind_icon"
+                android:layout_width="26dp"
+                android:layout_height="25dp"
+                android:contentDescription="@string/todo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.411"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/course_location"
+                app:srcCompat="@drawable/ic_wind" />
 
             <ImageView
                 android:id="@+id/course_raindrop_icon"
                 android:layout_width="26dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="26dp"
+                android:contentDescription="@string/todo"
                 android:padding="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.177"
+                app:layout_constraintHorizontal_bias="0.15"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
                 app:srcCompat="@drawable/ic_raindrop" />
@@ -152,6 +170,7 @@
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="14dp"
                 android:layout_marginBottom="4dp"
+                android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.866"
