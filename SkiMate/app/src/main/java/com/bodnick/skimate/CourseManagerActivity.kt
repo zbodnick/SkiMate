@@ -32,33 +32,33 @@ class CourseManagerActivity : AppCompatActivity() {
                 location = "Stub Canal",
                 lat = " ",
                 lng = " ",
-                thumbnail = " ",
+//                thumbnail = " ",
                 weatherIcon = " ",
                 temp = "77°F",
                 precipitation = "32%",
                 wind = "10mph"
             ),
             Course (
-                name = "Camp Ramah",
-                location = "Skeleton Lake",
-                lat = " ",
-                lng = " ",
-                thumbnail = " ",
-                weatherIcon = " ",
-                temp = "54°F",
-                precipitation = "8%",
-                wind = "12mph"
-            ),
-            Course (
-                name = "Palm Beach Training Center",
+                name = "PB Training Center",
                 location = "Lake 38",
                 lat = " ",
                 lng = " ",
-                thumbnail = " ",
+//                thumbnail = " ",
                 weatherIcon = " ",
                 temp = "84°F",
                 precipitation = "0%",
                 wind = "6mph"
+            ),
+            Course (
+                name = "Camp Ramah",
+                location = "Skeleton Lake",
+                lat = " ",
+                lng = " ",
+//                thumbnail = " ",
+                weatherIcon = " ",
+                temp = "54°F",
+                precipitation = "8%",
+                wind = "12mph"
             )
         )
     }

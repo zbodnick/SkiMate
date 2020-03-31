@@ -5,7 +5,7 @@ data class Course (
     val location: String,
     val lat: String,
     val lng: String,
-    val thumbnail: String,
+//    val thumbnail: String,
     val weatherIcon: String,
     val temp: String,
     val precipitation: String,

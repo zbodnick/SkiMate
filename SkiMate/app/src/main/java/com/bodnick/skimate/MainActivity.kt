@@ -115,8 +115,9 @@ class MainActivity : AppCompatActivity() {
                             .apply()
 
                         // An Intent is used to start a new Activity and also send data to it (via `putExtra(...)`)
-                        val intent: Intent = Intent(this, MainActivity::class.java)
+                        val intent = Intent(this@MainActivity, CourseManagerActivity::class.java)
                         startActivity(intent)
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     } else {
                         val exception = task.exception!!
                         Toast.makeText(
@@ -171,7 +172,7 @@ class MainActivity : AppCompatActivity() {
 
         val intent = Intent(this@MainActivity, RegisterActivity::class.java)
         startActivity(intent)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
 
     }
 }

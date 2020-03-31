@@ -40,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var firebaseAuth: FirebaseAuth
 
-    //    private lateinit var fname: EditText
+//    private lateinit var fname: EditText
 //    private lateinit var lname: EditText
 //    private lateinit var username: EditText
     private lateinit var password: EditText
@@ -83,6 +83,10 @@ class RegisterActivity : AppCompatActivity() {
                             "Welcome to Ski Mate!",
                             Toast.LENGTH_SHORT
                         ).show()
+
+                        val intent = Intent(this@RegisterActivity, CourseManagerActivity::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                     } else {
                         val exception = task.exception!!
                         Toast.makeText(
@@ -129,6 +133,6 @@ class RegisterActivity : AppCompatActivity() {
 
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 }
