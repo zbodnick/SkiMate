@@ -7,4 +7,7 @@
     <string name="have_account">Already have an account? Log in</string>
     <string name="email">email</string>
     <string name="logo">logo</string>
+    <string name="manager_title">Course Manager</string>
+    <string name="todo">TODO</string>
+
 </resources>
