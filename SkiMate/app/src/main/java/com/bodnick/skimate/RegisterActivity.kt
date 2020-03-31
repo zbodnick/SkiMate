@@ -127,7 +127,7 @@ class RegisterActivity : AppCompatActivity() {
         val view = findViewById<TextView>(R.id.has_account)
         view.setTextColor(Color.WHITE)
 
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, CourseManagerActivity::class.java)
         startActivity(intent)
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
