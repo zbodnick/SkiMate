@@ -1,5 +1,6 @@
 package com.bodnick.skimate
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -18,6 +19,9 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+//import sun.jvm.hotspot.utilities.IntArray
+
+
 //import sun.jvm.hotspot.utilities.IntArray
 
 
@@ -49,19 +53,19 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var login: Button
 
-    override fun onStart() {
-        super.onStart()
-
-        if (firebaseAuth.currentUser != null) {
-            val user = firebaseAuth.currentUser
-            Toast.makeText(this, "Welcome back, ${user!!.email}",
-                Toast.LENGTH_SHORT).show()
-
-            // TODO - change intent
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//
+//        if (firebaseAuth.currentUser != null) {
+//            val user = firebaseAuth.currentUser
+//            Toast.makeText(this, "Welcome back, ${user!!.email}",
+//                Toast.LENGTH_SHORT).show()
+//
+//            // TODO - change intent
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -162,10 +166,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun goToSignup(v: View?) {
-        val tv = findViewById<TextView>(R.id.needs_account)
-        tv.setTextColor(Color.WHITE)
+        val view = findViewById<TextView>(R.id.needs_account)
+        view.setTextColor(Color.WHITE)
 
-        val intent: Intent = Intent(this, RegisterActivity::class.java)
+        val intent = Intent(this@MainActivity, RegisterActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+
     }
 }

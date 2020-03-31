@@ -1,5 +1,6 @@
 package com.bodnick.skimate
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -8,8 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.transition.Explode
 import android.util.Log
 import android.view.View
+import android.view.Window
 import android.widget.*
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
@@ -121,10 +124,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     fun goToLogin(v: View?) {
-        val tv = findViewById<TextView>(R.id.has_account)
-        tv.setTextColor(Color.WHITE)
+        val view = findViewById<TextView>(R.id.has_account)
+        view.setTextColor(Color.WHITE)
 
-        val intent: Intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 }
