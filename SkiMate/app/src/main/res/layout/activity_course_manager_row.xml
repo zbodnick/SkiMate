@@ -67,8 +67,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/course_thumbnail"
                 app:layout_constraintVertical_bias="0.173" />
 
-            <ImageView
-                android:id="@+id/imageView2"
+            <ImageButton
+                android:id="@+id/course_view_in_map"
                 android:layout_width="37dp"
                 android:layout_height="31dp"
                 app:layout_constraintBottom_toBottomOf="parent"
