@@ -14,7 +14,7 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
 import java.lang.Exception
 
-class MainActivity : AppCompatActivity() {
+class SignupActivity : AppCompatActivity() {
 
     /*
 
@@ -42,6 +42,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var login: Button
 
+    private lateinit var signup: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,18 +62,15 @@ class MainActivity : AppCompatActivity() {
         username = findViewById(R.id.username)
         password = findViewById(R.id.password)
         login = findViewById(R.id.login)
+        signup = findViewById(R.id.signup)
 
-        // Using a lambda to implement a View.OnClickListener interface. We can do this because
-        // an OnClickListener is an interface that only requires *one* function.
-        login.setOnClickListener { view: View ->
-            Log.d("MainActivity", "onClick() called")
-
+        signup.setOnClickListener {
             // Save user credentials to file
             val inputtedUsername: String = username.text.toString()
             val inputtedPassword: String = password.text.toString()
 
             firebaseAuth
-                .signInWithEmailAndPassword(inputtedUsername, inputtedPassword)
+                .createUserWithEmailAndPassword(inputtedUsername, inputtedPassword)
                 .addOnCompleteListener { task: Task<AuthResult> ->
                     if (task.isSuccessful) {
                         val currentUser: FirebaseUser = firebaseAuth.currentUser!!
@@ -79,24 +78,14 @@ class MainActivity : AppCompatActivity() {
 
                         Toast.makeText(
                             this,
-                            "Signed in as $email!",
+                            "Registered successfully as $email!",
                             Toast.LENGTH_SHORT
                         ).show()
-
-                        preferences
-                            .edit()
-                            .putString("username", inputtedUsername)
-                            .putString("password", inputtedPassword)
-                            .apply()
-
-                        // An Intent is used to start a new Activity and also send data to it (via `putExtra(...)`)
-                        val intent: Intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
                     } else {
                         val exception = task.exception!!
                         Toast.makeText(
                             this,
-                            "Failed to sign in: $exception!",
+                            "Failed to register: $exception!",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
