@@ -48,7 +48,11 @@ class CourseManagerActivity : AppCompatActivity() {
                     apiKey = apiKey,
                     courses = courses
                 )
-                adapter = CourseAdapter(updatedCourses)
+
+                runOnUiThread {
+                    adapter = CourseAdapter(updatedCourses)
+                    recyclerView.adapter = adapter
+                }
 
             } catch (exception: Exception) {
                 exception.printStackTrace()
