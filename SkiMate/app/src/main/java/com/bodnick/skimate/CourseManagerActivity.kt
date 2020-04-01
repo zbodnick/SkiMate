@@ -14,6 +14,8 @@ class CourseManagerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_manager)
 
+        setTitle(R.string.manager_title);
+
         recyclerView = findViewById(R.id.recyclerView)
 
         // Set the RecyclerView direction to vertical (the default)
@@ -28,7 +30,7 @@ class CourseManagerActivity : AppCompatActivity() {
     private fun getCourses(): List<Course> {
         return listOf(
             Course (
-                name = "Chip's Course",
+                name = "PB Water Sports",
                 location = "Stub Canal",
                 lat = " ",
                 lng = " ",

@@ -6,48 +6,37 @@
     android:layout_height="wrap_content"
     android:layout_marginRight="5dp"
     android:layout_marginLeft="5dp"
-    android:layout_marginBottom="5dp"
-    android:layout_marginTop="0dp"
+    android:layout_marginBottom="3dp"
+    android:layout_marginTop="4dp"
     android:layout_gravity="center_horizontal"
     >
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="382dp"
-        android:layout_height="318dp"
+        android:layout_width="379dp"
+        android:layout_height="326dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:elevation="8dp"
+        app:cardBackgroundColor="@android:color/white"
+        app:cardCornerRadius="10dp"
+        app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="15dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/card_view_layout"
             android:layout_width="wrap_content"
-            android:layout_height="300dp"
-            android:layout_margin="12dp"
-            >
-
-            <ImageView
-                android:id="@+id/course_card_background"
-                android:layout_width="353dp"
-                android:layout_height="190dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_primary_background" />
+            android:layout_height="305dp"
+            android:layout_margin="12dp">
 
             <ImageView
                 android:id="@+id/course_thumbnail"
                 android:layout_width="331dp"
-                android:layout_height="167dp"
+                android:layout_height="175dp"
+                android:foreground="@drawable/round_outline"
                 android:layout_centerVertical="true"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
@@ -59,7 +48,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.024"
-                app:srcCompat="@android:drawable/ic_menu_mapmode" />
+                />
 
             <TextView
                 android:id="@+id/course_location"
@@ -99,61 +88,42 @@
                 android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.955"
+                app:layout_constraintHorizontal_bias="0.948"
                 app:layout_constraintStart_toEndOf="@+id/course_location"
                 app:layout_constraintTop_toBottomOf="@+id/course_thumbnail"
-                app:layout_constraintVertical_bias="0.617"
+                app:layout_constraintVertical_bias="0.472"
                 app:srcCompat="@drawable/ic_arrow_right_24dp" />
 
             <TextView
                 android:id="@+id/course_temperature"
                 android:layout_width="61dp"
                 android:layout_height="39dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginBottom="10dp"
                 android:paddingTop="2dp"
                 android:text="77°F"
                 android:textAlignment="center"
                 android:textSize="26sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/course_raindrop_icon"
-                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
-                app:layout_constraintVertical_bias="0.714" />
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/course_wind_speed"
                 android:layout_width="58dp"
                 android:layout_height="25dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="1dp"
                 android:gravity="center_vertical"
                 android:text="10mph"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.542"
+                app:layout_constraintHorizontal_bias="0.558"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
-                app:layout_constraintVertical_bias="0.566" />
-
-            <TextView
-                android:id="@+id/course_rain_percent"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="14dp"
-                android:gravity="center_vertical"
-                android:text="32%"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.34"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/course_location"
-                app:layout_constraintVertical_bias="0.566" />
+                app:layout_constraintVertical_bias="0.36" />
 
             <ImageView
                 android:id="@+id/course_wind_icon"
@@ -163,25 +133,43 @@
                 android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.01"
                 app:layout_constraintStart_toEndOf="@+id/course_rain_percent"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
-                app:layout_constraintVertical_bias="0.571"
+                app:layout_constraintVertical_bias="0.304"
                 app:srcCompat="@drawable/ic_wind" />
+
+            <TextView
+                android:id="@+id/course_rain_percent"
+                android:layout_width="30dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="26dp"
+                android:gravity="center_vertical"
+                android:text="32%"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.36"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/course_location"
+                app:layout_constraintVertical_bias="0.36" />
 
             <ImageView
                 android:id="@+id/course_raindrop_icon"
                 android:layout_width="26dp"
                 android:layout_height="25dp"
-                android:layout_marginStart="26dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="12dp"
                 android:contentDescription="@string/todo"
                 android:padding="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.189"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/course_temperature"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
-                app:layout_constraintVertical_bias="0.58"
+                app:layout_constraintVertical_bias="0.272"
                 app:srcCompat="@drawable/ic_raindrop" />
 
             <ImageView
@@ -194,10 +182,10 @@
                 android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.874"
+                app:layout_constraintHorizontal_bias="0.87"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_thumbnail"
-                app:layout_constraintVertical_bias="0.744"
+                app:layout_constraintVertical_bias="0.388"
                 app:srcCompat="@drawable/ic_weather_icon_placeholder" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
