@@ -6,6 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
 import java.util.concurrent.TimeUnit
+import kotlin.math.roundToInt
 
 class OpenWeatherManager {
 
@@ -59,7 +60,7 @@ class OpenWeatherManager {
                 val array: JSONArray? = weatherJSON.getJSONArray("weather")
                 val main_info: JSONObject? = array?.getJSONObject(0)
 
-                val temperature: String? = main?.optDouble("temp").toString()
+                var temperature: String? = main?.optString("temp")
                 val iconID: String? = main_info?.optString("icon")
 
 
@@ -69,7 +70,9 @@ class OpenWeatherManager {
                 val wind: JSONObject? = weatherJSON.getJSONObject("wind")
                 val windSpeed: String? = wind?.optString("speed")
 
-                it.temp = "$temperature°F"
+                temperature = temperature?.toDouble()?.roundToInt().toString()
+
+                it.temp = "${temperature}°F"
                 it.wind = "${windSpeed}mph"
 //                it.precipitation = rainVolumePastHour
                 it.weatherIcon = iconID
