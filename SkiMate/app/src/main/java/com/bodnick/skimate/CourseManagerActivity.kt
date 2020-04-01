@@ -5,10 +5,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.jetbrains.anko.doAsync
 
 class CourseManagerActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
+
+    private lateinit var adapter: CourseAdapter
+
+    private lateinit var updatedCourses: List<Course>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +27,41 @@ class CourseManagerActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val courses = getCourses()
-        val adapter = CourseAdapter(courses)
+
+        adapter = CourseAdapter(courses)
         recyclerView.adapter = adapter
 
+        updateCourses(courses)
+        adapter.notifyDataSetChanged()
+
+    }
+
+    private fun updateCourses(courses: List<Course>) {
+        doAsync {
+            val weatherManager = OpenWeatherManager()
+
+            try {
+                // Read OpenWeather API key from XML file
+                val apiKey = getString(R.string.openWeatherAPI)
+
+                updatedCourses = weatherManager.retrieveWeatherData (
+                    apiKey = apiKey,
+                    courses = courses
+                )
+                adapter = CourseAdapter(updatedCourses)
+
+            } catch (exception: Exception) {
+                exception.printStackTrace()
+                // Switch back to the UI Thread
+                runOnUiThread {
+                    Toast.makeText(
+                        this@CourseManagerActivity,
+                        "Error: Cannot retrieve data from Open Weather API: $exception",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+        }
     }
 
     private fun getCourses(): List<Course> {
@@ -32,8 +69,8 @@ class CourseManagerActivity : AppCompatActivity() {
             Course (
                 name = "PB Water Sports",
                 location = "Stub Canal",
-                lat = " ",
-                lng = " ",
+                lat = "26.685553",
+                lng = "-80.073359",
 //                thumbnail = " ",
                 weatherIcon = " ",
                 temp = "77°F",
@@ -43,8 +80,8 @@ class CourseManagerActivity : AppCompatActivity() {
             Course (
                 name = "PB Training Center",
                 location = "Lake 38",
-                lat = " ",
-                lng = " ",
+                lat = "26.382224",
+                lng = "-80.223308",
 //                thumbnail = " ",
                 weatherIcon = " ",
                 temp = "84°F",
@@ -54,8 +91,8 @@ class CourseManagerActivity : AppCompatActivity() {
             Course (
                 name = "Camp Ramah",
                 location = "Skeleton Lake",
-                lat = " ",
-                lng = " ",
+                lat = "45.226577",
+                lng = "-79.497161",
 //                thumbnail = " ",
                 weatherIcon = " ",
                 temp = "54°F",

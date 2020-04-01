@@ -52,7 +52,6 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
 
     }
 
-
     // Return the total number of rows you expect your list to have
     override fun getItemCount(): Int {
         return courses.size

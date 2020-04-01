@@ -96,8 +96,8 @@
 
             <TextView
                 android:id="@+id/course_temperature"
-                android:layout_width="61dp"
-                android:layout_height="39dp"
+                android:layout_width="84dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="10dp"
                 android:paddingTop="2dp"
@@ -120,7 +120,7 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.558"
+                app:layout_constraintHorizontal_bias="0.664"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
                 app:layout_constraintVertical_bias="0.36" />
@@ -133,7 +133,7 @@
                 android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.01"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/course_rain_percent"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
                 app:layout_constraintVertical_bias="0.304"
@@ -150,7 +150,7 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.36"
+                app:layout_constraintHorizontal_bias="0.477"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
                 app:layout_constraintVertical_bias="0.36" />
@@ -166,7 +166,7 @@
                 android:padding="4dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.034"
                 app:layout_constraintStart_toEndOf="@+id/course_temperature"
                 app:layout_constraintTop_toBottomOf="@+id/course_location"
                 app:layout_constraintVertical_bias="0.272"
