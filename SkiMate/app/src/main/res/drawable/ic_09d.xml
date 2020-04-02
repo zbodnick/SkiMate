@@ -1,0 +1,34 @@
+<vector android:height="76.3dp" android:viewportHeight="76.3"
+    android:viewportWidth="92.44" android:width="92.44dp"
+    xmlns:aapt="http://schemas.android.com/aapt" xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:pathData="M61.09,22.56m-12.96,0a12.96,12.96 0,1 1,25.92 0a12.96,12.96 0,1 1,-25.92 0">
+        <aapt:attr name="android:fillColor">
+            <gradient android:endX="70.25" android:endY="13.39"
+                android:startX="51.92" android:startY="31.72" android:type="linear">
+                <item android:color="#FFFCB627" android:offset="0"/>
+                <item android:color="#FFFFCD22" android:offset="1"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:fillColor="#fff" android:pathData="M58.77,52a10.66,10.66 0,1 0,0 -21.32h-0.11a17,17 0,0 0,-32.45 -5.07H26A13.2,13.2 0,1 0,26 52"/>
+    <path android:pathData="M73,52a6.7,6.7 0,1 0,0 -13.39h-0.06a10.69,10.69 0,0 0,-20.38 -3.18h-0.16a8.29,8.29 0,0 0,0 16.57">
+        <aapt:attr name="android:fillColor">
+            <gradient android:endX="71.83" android:endY="34.2"
+                android:startX="51.51" android:startY="54.52" android:type="linear">
+                <item android:color="#FFCFE7F7" android:offset="0"/>
+                <item android:color="#FFE1EDF8" android:offset="1"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:pathData="M25.12,68.31a2,2 0,0 1,-1.73 -3l2.88,-5a2,2 0,0 1,3.47 2l-2.89,5A2,2 0,0 1,25.12 68.31Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:endX="30.01" android:endY="63.81"
+                android:startX="23.12" android:startY="63.81" android:type="linear">
+                <item android:color="#FF00ADEE" android:offset="0"/>
+                <item android:color="#FF00BCF1" android:offset="1"/>
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path android:pathData="M38.73,68.31a2,2 0,0 1,-1 -0.27A2,2 0,0 1,37 65.31l2.89,-5a2,2 0,1 1,3.46 2l-2.89,5A2,2 0,0 1,38.73 68.31Z"/>
+    <path android:pathData="M53.34,68.31a2,2 0,0 1,-1 -0.27,2 2,0 0,1 -0.73,-2.73l2.89,-5a2,2 0,1 1,3.46 2l-2.88,5A2,2 0,0 1,53.34 68.31Z"/>
+</vector>

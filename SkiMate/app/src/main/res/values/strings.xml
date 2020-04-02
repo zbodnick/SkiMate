@@ -10,4 +10,5 @@
     <string name="manager_title">Course Manager</string>
     <string name="todo">TODO</string>
     <string name="openWeatherAPI">ccd0e2c49b12698e5c8b1ccf07dd6f5a</string>
+    <string name="title_activity_course_map">Map</string>
 </resources>
