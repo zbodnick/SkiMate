@@ -38,12 +38,12 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
         val lng = currentCourse.lng.toDouble()
         val location = LatLng(lat, lng)
 
+        val apiKey = "AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA"
+
         Picasso.get().setIndicatorsEnabled(true)
         Picasso.get()
-            .load("https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&scale=2&zoom=20&size=400x400&maptype=hybrid&key=$apiKey")
+            .load("https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&scale=2&zoom=18&size=400x400&maptype=hybrid&key=$apiKey")
             .into(holder.mapView)
-
-
 
         // Setting  weather dynamic weather icon
         when (currentCourse.weatherIcon) {

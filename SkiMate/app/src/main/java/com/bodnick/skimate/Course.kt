@@ -5,7 +5,6 @@ data class Course (
     var location: String?,
     var lat: String,
     var lng: String,
-//    val thumbnail: String,
     var weatherIcon: String?,
     var temp: String?,
     var precipitation: String?,
