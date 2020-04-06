@@ -192,7 +192,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/course_thumbnail"
                 app:layout_constraintVertical_bias="0.388" />
 
-            <com.google.android.gms.maps.MapView
+            <ImageView
                 android:id="@+id/course_thumbnail"
                 android:layout_width="331dp"
                 android:layout_height="175dp"

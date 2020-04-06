@@ -104,7 +104,7 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
 
         val weatherIcon: ImageView = itemView.findViewById(R.id.course_current_weather_icon)
 
-        val mapView: MapView = itemView.findViewById(R.id.course_thumbnail)
+        val mapView: ImageView = itemView.findViewById(R.id.course_thumbnail)
 
     }
 
