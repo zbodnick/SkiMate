@@ -42,7 +42,7 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
 
         Picasso.get().setIndicatorsEnabled(true)
         Picasso.get()
-            .load("https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&scale=2&zoom=18&size=400x400&maptype=hybrid&key=$apiKey")
+            .load("https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&scale=2&zoom=18&size=400x400&maptype=terrain&key=$apiKey")
             .into(holder.mapView)
 
         // Setting  weather dynamic weather icon
