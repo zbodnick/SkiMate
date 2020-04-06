@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
+import com.squareup.picasso.Picasso
 
 
 class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
@@ -36,6 +37,13 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
         val lat = currentCourse.lat.toDouble()
         val lng = currentCourse.lng.toDouble()
         val location = LatLng(lat, lng)
+
+        Picasso.get().setIndicatorsEnabled(true)
+        Picasso.get()
+            .load("https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&scale=2&zoom=20&size=400x400&maptype=hybrid&key=$apiKey")
+            .into(holder.mapView)
+
+
 
         // Setting  weather dynamic weather icon
         when (currentCourse.weatherIcon) {
