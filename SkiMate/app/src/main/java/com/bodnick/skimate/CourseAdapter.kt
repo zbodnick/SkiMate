@@ -73,7 +73,7 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
             // Click listener for view course button
             val intent = Intent(context, CourseMapActivity::class.java)
             context.startActivity(intent)
-            activity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 //
 //        mMap.addMarker(MarkerOptions().position(location).title(currentCourse.name))
