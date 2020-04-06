@@ -1,15 +1,13 @@
 package com.bodnick.skimate
 
 data class Course (
-    val name: String,
-    val location: String,
-    val lat: String,
-    val lng: String,
-//    val thumbnail: String,
-    val weatherIcon: String,
-    val temp: String,
-    val precipitation: String,
-    val wind: String
-
+    var name: String?,
+    var location: String?,
+    var lat: String,
+    var lng: String,
+    var weatherIcon: String?,
+    var temp: String?,
+    var precipitation: String?,
+    var wind: String?
 )
 

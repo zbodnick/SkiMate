@@ -1,16 +1,16 @@
 package com.bodnick.skimate
 
-import android.content.Intent
-import android.net.Uri
+import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.RatingBar
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.model.LatLng
+import com.squareup.picasso.Picasso
 
 
 class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
@@ -19,7 +19,9 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // Layout inflation (read & parse XML file and return a reference to the root layout)
         val view: View = LayoutInflater.from(parent.context).inflate(R.layout.activity_course_manager_row, parent, false)
+
         return ViewHolder(view)
+
     }
 
     // The adapter has a row that's ready to be rendered and needs the content filled in
@@ -32,10 +34,46 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
         holder.precipitation.text = currentCourse.precipitation
         holder.wind.text = currentCourse.wind
 
-//        holder.name.text = currentCourse.lat
-//        holder.name.text = currentCourse.lng
-//        holder.name.text = currentCourse.thumbnail
-//        holder.name.text = currentCourse.weatherIcon
+        val lat = currentCourse.lat.toDouble()
+        val lng = currentCourse.lng.toDouble()
+        val location = LatLng(lat, lng)
+
+        val apiKey = "AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA"
+
+        Picasso.get().setIndicatorsEnabled(true)
+        Picasso.get()
+            .load("https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&scale=2&zoom=18&size=400x400&maptype=terrain&key=$apiKey")
+            .into(holder.mapView)
+
+        // Setting  weather dynamic weather icon
+        when (currentCourse.weatherIcon) {
+            "01d" -> holder.weatherIcon.setImageResource(R.drawable.ic_01d);
+            "01n" -> holder.weatherIcon.setImageResource(R.drawable.ic_01n);
+            "02d" -> holder.weatherIcon.setImageResource(R.drawable.ic_02d);
+            "02n" -> holder.weatherIcon.setImageResource(R.drawable.ic_02n);
+            "03d" -> holder.weatherIcon.setImageResource(R.drawable.ic_03d);
+            "03n" -> holder.weatherIcon.setImageResource(R.drawable.ic_03n);
+            "04d" -> holder.weatherIcon.setImageResource(R.drawable.ic_04d);
+            "04n" -> holder.weatherIcon.setImageResource(R.drawable.ic_04n);
+            "09d" -> holder.weatherIcon.setImageResource(R.drawable.ic_09d);
+            "09n" -> holder.weatherIcon.setImageResource(R.drawable.ic_09n);
+            "10d" -> holder.weatherIcon.setImageResource(R.drawable.ic_10d);
+            "10n" -> holder.weatherIcon.setImageResource(R.drawable.ic_10n);
+            "11d" -> holder.weatherIcon.setImageResource(R.drawable.ic_11d);
+            "11n" -> holder.weatherIcon.setImageResource(R.drawable.ic_11n);
+            "13d" -> holder.weatherIcon.setImageResource(R.drawable.ic_13d);
+            "13n" -> holder.weatherIcon.setImageResource(R.drawable.ic_13n);
+            "50d" -> holder.weatherIcon.setImageResource(R.drawable.ic_50d);
+            "50n" -> holder.weatherIcon.setImageResource(R.drawable.ic_50n);
+        }
+
+
+
+//
+//        mMap.addMarker(MarkerOptions().position(location).title(currentCourse.name))
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+//        holder.map.onResume();// needed to get the map to display immediately
+
 
 //        if (currentCourse. .isEmpty()) {
 //            holder. .isVisible = false
@@ -52,11 +90,11 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
 
     }
 
-
     // Return the total number of rows you expect your list to have
     override fun getItemCount(): Int {
         return courses.size
     }
+
 
     // A ViewHolder represents the Views that comprise a single row in our list (e.g.
     // our row to display a Business contains three TextViews and one ImageView).
@@ -72,7 +110,10 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
         val wind: TextView = itemView.findViewById(R.id.course_wind_speed)
         val name: TextView = itemView.findViewById(R.id.course_name)
 
-        //        val thumbnail: ImageView = itemView.findViewById(R.id.url)
+        val weatherIcon: ImageView = itemView.findViewById(R.id.course_current_weather_icon)
+
+        val mapView: ImageView = itemView.findViewById(R.id.course_thumbnail)
 
     }
+
 }

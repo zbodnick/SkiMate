@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=B5:E4:43:8B:F2:03:B1:07:62:4D:5C:BE:A1:98:38:AE:E2:91:4E:0B%3Bcom.bodnick.skimate
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    com.bodnick.skimate
+
+    SHA-1 certificate fingerprint:
+    B5:E4:43:8B:F2:03:B1:07:62:4D:5C:BE:A1:98:38:AE:E2:91:4E:0B
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA</string>
+</resources>
