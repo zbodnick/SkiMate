@@ -1,19 +1,21 @@
 package com.bodnick.skimate
 
-import android.content.res.Resources
-import android.graphics.drawable.Drawable
+import android.app.Activity
+import android.app.PendingIntent.getActivity
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.model.LatLng
 import com.squareup.picasso.Picasso
 
 
-class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
+class CourseAdapter(val courses: List<Course>, val context: Context, val activity: Activity) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
 
     // The adapter needs to render a new row and needs to know what XML file to use
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -67,8 +69,12 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
             "50n" -> holder.weatherIcon.setImageResource(R.drawable.ic_50n);
         }
 
-
-
+        holder.viewCourseButton.setOnClickListener {
+            // Click listener for view course button
+            val intent = Intent(context, CourseMapActivity::class.java)
+            context.startActivity(intent)
+            activity.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+        }
 //
 //        mMap.addMarker(MarkerOptions().position(location).title(currentCourse.name))
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
@@ -95,7 +101,6 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
         return courses.size
     }
 
-
     // A ViewHolder represents the Views that comprise a single row in our list (e.g.
     // our row to display a Business contains three TextViews and one ImageView).
     //
@@ -113,6 +118,8 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
         val weatherIcon: ImageView = itemView.findViewById(R.id.course_current_weather_icon)
 
         val mapView: ImageView = itemView.findViewById(R.id.course_thumbnail)
+
+        val viewCourseButton: ImageButton = itemView.findViewById(R.id.view_course_button)
 
     }
 

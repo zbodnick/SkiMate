@@ -1,5 +1,6 @@
 package com.bodnick.skimate
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -24,6 +25,8 @@ class CourseManagerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_manager)
 
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
+
         setTitle(R.string.manager_title);
 
         recyclerView = findViewById(R.id.recyclerView)
@@ -33,7 +36,7 @@ class CourseManagerActivity : AppCompatActivity() {
 
         val courses = getCourses()
 
-        adapter = CourseAdapter(courses)
+        adapter = CourseAdapter(courses, this, this)
         recyclerView.adapter = adapter
 
         updateCourses(courses)
@@ -55,7 +58,7 @@ class CourseManagerActivity : AppCompatActivity() {
                 )
 
                 runOnUiThread {
-                    adapter = CourseAdapter(updatedCourses)
+                    adapter = CourseAdapter(updatedCourses, this@CourseManagerActivity, this@CourseManagerActivity)
                     recyclerView.adapter = adapter
                 }
 
