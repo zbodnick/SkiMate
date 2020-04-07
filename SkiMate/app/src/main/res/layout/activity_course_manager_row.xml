@@ -196,18 +196,18 @@
 
             <ImageView
                 android:id="@+id/course_current_weather_icon"
-                android:layout_width="101dp"
-                android:layout_height="85dp"
+                android:layout_width="81dp"
+                android:layout_height="64dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginBottom="14dp"
-                android:background="#703D73B9"
+                android:background="@color/iconBackgroundGrey"
                 android:contentDescription="@string/todo"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/course_thumbnail"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintVertical_bias="0.513" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

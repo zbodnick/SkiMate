@@ -5,4 +5,5 @@
     <color name="colorAccent">#81AFFB</color>
     <color name="mutedText">#dfeaff</color>
     <color name="defaultGrey">#F5F5F5</color>
+    <color name="iconBackgroundGrey">#d7d7d7</color>
 </resources>
