@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
+import android.widget.SeekBar
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -12,21 +13,48 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
-import sun.jvm.hotspot.utilities.IntArray
-
 
 class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var resizeSeekbar: SeekBar
+    private lateinit var rotateSeekbar: SeekBar
+    private var resizeProgress: Int = 0
+    private var rotateProgress: Int = 0
+    private var rotatingCourse: Boolean = false
+    private lateinit var courseMarker: Marker
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_map)
 
+        resizeSeekbar = findViewById(R.id.resizeSeekBar)
+        rotateSeekbar = findViewById(R.id.rotateSeekBar)
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        rotateSeekbar.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
+//                if (!preferencesSaved) {
+//                    restuarantCount.text = "Results (${restaurantSeekbar.progress}):"
+//                } else {
+//                    restuarantCount.text = "Results (${preferences.getInt("numRestaurants",0)}):"
+//                }
+
+                courseMarker.rotation = progress.toFloat()
+
+            }
+
+            override fun onStartTrackingTouch(seek: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seek: SeekBar) {
+            }
+        })
     }
 
     /**
@@ -44,41 +72,36 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val lng = intent.getStringExtra("lng")
         val name = intent.getStringExtra("name")
 
+        mMap.setMinZoomPreference(25.0f)
+        mMap.setMaxZoomPreference(30.0f)
+
         val course = LatLng(lat.toDouble(), lng.toDouble())
 
-        val courseOverlay = GroundOverlayOptions()
-            .image(bitmapDescriptorFromVector(this, R.drawable.ic_course_overlay))
-            .position(course, 8600f, 6500f)
-        mMap.addGroundOverlay(courseOverlay)
+        courseMarker = mMap.addMarker(MarkerOptions()
+            .flat(rotatingCourse)
+            .position(course)
+            .anchor(0.5f, 0.5f)
+            .title(name)
+            .icon(BitmapDescriptorFactory.fromBitmap(R.drawable.ic_course_overlay.toBitmap(this))))
 
         // Add a marker at the course and move the camera
-        mMap.addMarker(MarkerOptions().position(course).title(name))
 
-        val zoomLevel = 16.0f
+        val zoomLevel = 28.0f
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(course, zoomLevel))
     }
 
-    private fun bitmapDescriptorFromVector(context: Context, @DrawableRes vectorDrawableResourceId: Int): BitmapDescriptor {
-        val background =
-            ContextCompat.getDrawable(context, vectorDrawableResourceId)
-        background!!.setBounds(0, 0, background.intrinsicWidth, background.intrinsicHeight)
-        val vectorDrawable =
-            ContextCompat.getDrawable(context, vectorDrawableResourceId)
-        vectorDrawable!!.setBounds(
-            40,
-            20,
-            vectorDrawable.intrinsicWidth + 40,
-            vectorDrawable.intrinsicHeight + 20
-        )
-        val bitmap = Bitmap.createBitmap(
-            background.intrinsicWidth,
-            background.intrinsicHeight,
-            Bitmap.Config.ARGB_8888
-        )
+    private fun Int.toBitmap(context: Context): Bitmap? {
+
+        // Retrieve vector asset drawable
+        val drawableAsset = ContextCompat.getDrawable(context, this) ?: return null
+        drawableAsset.setBounds(0, 0, drawableAsset.intrinsicWidth, drawableAsset.intrinsicHeight)
+        val bitmap = Bitmap.createBitmap(drawableAsset.intrinsicWidth, drawableAsset.intrinsicHeight, Bitmap.Config.ARGB_8888)
+
+        // Draw asset to bitmap
         val canvas = Canvas(bitmap)
-        background.draw(canvas)
-        vectorDrawable.draw(canvas)
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
+        drawableAsset.draw(canvas)
+
+        return bitmap
     }
 
 
