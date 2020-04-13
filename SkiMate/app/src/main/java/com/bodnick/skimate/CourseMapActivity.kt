@@ -1,14 +1,19 @@
 package com.bodnick.skimate
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
-import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
+import sun.jvm.hotspot.utilities.IntArray
+
 
 class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -35,13 +40,46 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
         val lat = intent.getStringExtra("lat")
         val lng = intent.getStringExtra("lng")
+        val name = intent.getStringExtra("name")
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(lat.toDouble(), lng.toDouble())
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val course = LatLng(lat.toDouble(), lng.toDouble())
+
+        val courseOverlay = GroundOverlayOptions()
+            .image(bitmapDescriptorFromVector(this, R.drawable.ic_course_overlay))
+            .position(course, 8600f, 6500f)
+        mMap.addGroundOverlay(courseOverlay)
+
+        // Add a marker at the course and move the camera
+        mMap.addMarker(MarkerOptions().position(course).title(name))
+
+        val zoomLevel = 16.0f
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(course, zoomLevel))
     }
+
+    private fun bitmapDescriptorFromVector(context: Context, @DrawableRes vectorDrawableResourceId: Int): BitmapDescriptor {
+        val background =
+            ContextCompat.getDrawable(context, vectorDrawableResourceId)
+        background!!.setBounds(0, 0, background.intrinsicWidth, background.intrinsicHeight)
+        val vectorDrawable =
+            ContextCompat.getDrawable(context, vectorDrawableResourceId)
+        vectorDrawable!!.setBounds(
+            40,
+            20,
+            vectorDrawable.intrinsicWidth + 40,
+            vectorDrawable.intrinsicHeight + 20
+        )
+        val bitmap = Bitmap.createBitmap(
+            background.intrinsicWidth,
+            background.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        background.draw(canvas)
+        vectorDrawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
+
+
 }
