@@ -1,17 +1,18 @@
 package com.bodnick.skimate
 
 import android.app.Activity
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.maps.model.LatLng
 import com.squareup.picasso.Picasso
 
 
@@ -36,9 +37,20 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
         holder.precipitation.text = currentCourse.precipitation
         holder.wind.text = currentCourse.wind
 
-        val lat = currentCourse.lat.toDouble()
-        val lng = currentCourse.lng.toDouble()
-        val location = LatLng(lat, lng)
+        val lat = currentCourse.lat
+        val lng = currentCourse.lng
+
+        holder.viewCourseButton.setOnClickListener {
+            // Click listener for view course button
+            val intent = Intent(context, CourseMapActivity::class.java)
+
+            intent.putExtra("lat", courses[position].lat)
+            intent.putExtra("lng", courses[position].lng)
+
+            context.startActivity(intent)
+
+            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
 
         val apiKey = "AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA"
 
@@ -68,13 +80,6 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
             "50d" -> holder.weatherIcon.setImageResource(R.drawable.ic_50d);
             "50n" -> holder.weatherIcon.setImageResource(R.drawable.ic_50n);
         }
-
-        holder.viewCourseButton.setOnClickListener {
-            // Click listener for view course button
-            val intent = Intent(context, CourseMapActivity::class.java)
-            context.startActivity(intent)
-            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-        }
 //
 //        mMap.addMarker(MarkerOptions().position(location).title(currentCourse.name))
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
@@ -84,15 +89,6 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
 //        if (currentCourse. .isEmpty()) {
 //            holder. .isVisible = false
 //        }
-
-//    val webIntent: Intent = Intent(Intent.ACTION_CALL, Uri.parse(currentBusiness.url))
-//    val phoneIntent: Intent = Intent(Intent.ACTION_CALL, Uri.parse(currentBusiness.url))
-//
-//    holder.url.setOnClickListener(View.OnClickListener {
-//        val intent = Intent(Intent.ACTION_VIEW)
-//        intent.data = Uri.parse(businesses[holder.adapterPosition].url)
-//        holder.startActivity(intent)
-//    })
 
     }
 
