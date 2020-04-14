@@ -35,6 +35,7 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
         undoButton = findViewById(R.id.undoButton)
         infoButton = findViewById(R.id.place_course_button)
 
+        rotateSeekbar.isEnabled = false
         undoButton.isEnabled = false
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -104,12 +105,11 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         undoButton.setOnClickListener {
-
             courseOverlay.remove()
 
             // Change info button back to default instructions b/c course has been removed from the map
             infoButton.text = getString(R.string.course_placement_instructions)
-            infoButton.setBackgroundResource(android.R.color.holo_red_light)
+            infoButton.setBackgroundResource(R.color.colorAccent)
 
             rotateSeekbar.isEnabled = false
             coursePlaced = false
