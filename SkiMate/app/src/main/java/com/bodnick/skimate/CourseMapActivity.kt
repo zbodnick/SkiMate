@@ -96,6 +96,7 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
             if (undoButton.isEnabled) {
+                rotateSeekbar.isEnabled = true
                 coursePlaced = true
                 infoButton.text = getString(R.string.done)
                 infoButton.setBackgroundResource(R.color.colorPrimaryDark)
@@ -110,6 +111,8 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
             infoButton.text = getString(R.string.course_placement_instructions)
             infoButton.setBackgroundResource(android.R.color.holo_red_light)
 
+            rotateSeekbar.isEnabled = false
+            coursePlaced = false
             undoButton.isEnabled = false
         }
 
