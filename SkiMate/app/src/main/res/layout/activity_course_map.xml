@@ -4,30 +4,17 @@
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MapsActivity" />
-
-    <Button
-        android:id="@+id/place_course_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@android:color/holo_red_dark"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:text="@string/course_placement_instructions"
-        android:textColor="@android:color/white"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintStart_toStartOf="parent" />
+        tools:context=".MapsActivity"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <ImageButton
         android:id="@+id/undoButton"
@@ -42,86 +29,64 @@
         map:layout_constraintVertical_bias="0.029"
         map:srcCompat="@drawable/ic_replay_black_24dp" />
 
-    <!--    <androidx.appcompat.widget.Toolbar-->
-<!--        android:id="@+id/toolbar"-->
-<!--        android:layout_width="391dp"-->
-<!--        android:layout_height="145dp"-->
-<!--        android:foreground="@drawable/top_rounded_corners"-->
-<!--        android:minHeight="?attr/actionBarSize"-->
-<!--        android:theme="?attr/actionBarTheme"-->
-<!--        map:layout_constraintBottom_toBottomOf="parent"-->
-<!--        map:layout_constraintEnd_toEndOf="parent"-->
-<!--        map:layout_constraintStart_toStartOf="parent"-->
-<!--        map:layout_constraintTop_toTopOf="@+id/map"-->
-<!--        map:layout_constraintVertical_bias="1.0" />-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="396dp"
+        android:layout_height="125dp"
+        android:foreground="@drawable/top_rounded_corners"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.461"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="@+id/map"
+        map:layout_constraintVertical_bias="1.0" />
 
-<!--    <SeekBar-->
-<!--        android:id="@+id/rotateSeekBar"-->
-<!--        android:layout_width="260dp"-->
-<!--        android:layout_height="51dp"-->
-<!--        android:layout_marginTop="30dp"-->
-<!--        android:max="360"-->
-<!--        android:min="0"-->
-<!--        map:layout_constraintBottom_toBottomOf="parent"-->
-<!--        map:layout_constraintEnd_toEndOf="parent"-->
-<!--        map:layout_constraintHorizontal_bias="0.761"-->
-<!--        map:layout_constraintStart_toStartOf="parent"-->
-<!--        map:layout_constraintTop_toTopOf="@+id/toolbar"-->
-<!--        map:layout_constraintVertical_bias="0.071" />-->
+    <TextView
+        android:id="@+id/rotateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:text="@string/rotate_title"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        map:layout_constraintBottom_toTopOf="@+id/place_course_button"
+        map:layout_constraintEnd_toStartOf="@+id/rotateSeekBar"
+        map:layout_constraintHorizontal_bias="0.433"
+        map:layout_constraintStart_toStartOf="@+id/toolbar"
+        map:layout_constraintTop_toTopOf="@+id/toolbar"
+        map:layout_constraintVertical_bias="0.638" />
 
-<!--    <SeekBar-->
-<!--        android:id="@+id/resizeSeekBar"-->
-<!--        android:layout_width="260dp"-->
-<!--        android:layout_height="51dp"-->
-<!--        android:layout_marginTop="4dp"-->
-<!--        map:layout_constraintBottom_toBottomOf="parent"-->
-<!--        map:layout_constraintEnd_toEndOf="parent"-->
-<!--        map:layout_constraintHorizontal_bias="0.761"-->
-<!--        map:layout_constraintStart_toStartOf="parent"-->
-<!--        map:layout_constraintTop_toBottomOf="@+id/rotateSeekBar"-->
-<!--        map:layout_constraintVertical_bias="0.1" />-->
+    <Button
+        android:id="@+id/place_course_button"
+        android:layout_width="344dp"
+        android:layout_height="41dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/holo_red_light"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/course_placement_instructions"
+        android:textColor="@android:color/white"
+        map:layout_constraintBottom_toBottomOf="@+id/map"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.492"
+        map:layout_constraintStart_toStartOf="parent" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/resizeTitle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Resize"-->
-<!--        android:textColor="@color/colorPrimaryDark"-->
-<!--        android:textSize="24sp"-->
-<!--        map:layout_constraintBottom_toBottomOf="parent"-->
-<!--        map:layout_constraintEnd_toStartOf="@+id/resizeSeekBar"-->
-<!--        map:layout_constraintHorizontal_bias="0.755"-->
-<!--        map:layout_constraintStart_toStartOf="parent"-->
-<!--        map:layout_constraintTop_toTopOf="@+id/toolbar"-->
-<!--        map:layout_constraintVertical_bias="0.858" />-->
+    <SeekBar
+        android:id="@+id/rotateSeekBar"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
+        android:max="360"
+        android:min="0"
+        android:paddingTop="0dp"
+        map:layout_constraintBottom_toTopOf="@+id/place_course_button"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.821"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="@+id/map"
+        map:layout_constraintVertical_bias="1.0" />
 
-<!--    <TextView-->
-<!--        android:id="@+id/rotateTitle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="36dp"-->
-<!--        android:text="Rotate"-->
-<!--        android:textColor="@color/colorPrimaryDark"-->
-<!--        android:textSize="24sp"-->
-<!--        map:layout_constraintBottom_toTopOf="@+id/resizeTitle"-->
-<!--        map:layout_constraintEnd_toStartOf="@+id/rotateSeekBar"-->
-<!--        map:layout_constraintHorizontal_bias="0.666"-->
-<!--        map:layout_constraintStart_toStartOf="@+id/toolbar"-->
-<!--        map:layout_constraintTop_toTopOf="@+id/toolbar"-->
-<!--        map:layout_constraintVertical_bias="0.272" />-->
-
-<!--    <TextView-->
-<!--        android:id="@+id/adjustMapTitle"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Adjust Slalom Course"-->
-<!--        android:textColor="@color/darkGrey"-->
-<!--        android:textStyle="bold"-->
-<!--        android:textSize="24sp"-->
-
-<!--        map:layout_constraintBottom_toTopOf="@+id/rotateSeekBar"-->
-<!--        map:layout_constraintEnd_toEndOf="@+id/toolbar"-->
-<!--        map:layout_constraintStart_toStartOf="@+id/toolbar"-->
-<!--        map:layout_constraintTop_toTopOf="@+id/toolbar" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,9 @@
     <string name="manager_title">Course Manager</string>
     <string name="todo">TODO</string>
     <string name="title_activity_course_map">Map</string>
-    <string name="course_placement_instructions"> Long Press Anywhere to Place Slalom Course</string>
+    <string name="done">Done</string>
+    <string name="rotate_title">ROTATE</string>
+    <string name="course_placement_instructions"> Long Press to Place Slalom Course</string>
 
     <string name="openWeatherAPI">ccd0e2c49b12698e5c8b1ccf07dd6f5a</string>
     <string name="google_maps_key">AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA</string>

@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
@@ -22,7 +23,7 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var rotateSeekbar: SeekBar
     private lateinit var undoButton: ImageButton
-    private var rotatingCourse: Boolean = true
+    private lateinit var infoButton: Button
     private var coursePlaced: Boolean = false
     private lateinit var courseOverlay: GroundOverlay
 
@@ -30,34 +31,30 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_map)
 
-//        rotateSeekbar = findViewById(R.id.rotateSeekBar)
+        rotateSeekbar = findViewById(R.id.rotateSeekBar)
         undoButton = findViewById(R.id.undoButton)
+        infoButton = findViewById(R.id.place_course_button)
+
         undoButton.isEnabled = false
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-//
-//        rotateSeekbar.setOnSeekBarChangeListener(object :
-//            SeekBar.OnSeekBarChangeListener {
-//            override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
-////                if (!preferencesSaved) {
-////                    restuarantCount.text = "Results (${restaurantSeekbar.progress}):"
-////                } else {
-////                    restuarantCount.text = "Results (${preferences.getInt("numRestaurants",0)}):"
-////                }
-//
-//                courseOverlay.bearing = progress.toFloat()
-//
-//            }
-//
-//            override fun onStartTrackingTouch(seek: SeekBar) {
-//            }
-//
-//            override fun onStopTrackingTouch(seek: SeekBar) {
-//            }
-//        })
+
+        rotateSeekbar.setOnSeekBarChangeListener(object :
+            SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seek: SeekBar, progress: Int, fromUser: Boolean) {
+                courseOverlay.bearing = progress.toFloat()
+
+            }
+
+            override fun onStartTrackingTouch(seek: SeekBar) {
+            }
+
+            override fun onStopTrackingTouch(seek: SeekBar) {
+            }
+        })
 
     }
 
@@ -76,17 +73,8 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val lng = intent.getStringExtra("lng")
         val name = intent.getStringExtra("name")
 
-//        mMap.setMinZoomPreference(25.0f)
-//        mMap.setMaxZoomPreference(30.0f)
-
         val course = LatLng(lat.toDouble(), lng.toDouble())
 
-//        courseMarker = mMap.addMarker(MarkerOptions()
-//            .flat(rotatingCourse)
-//            .position(course)
-//            .anchor(0.5f, 0.5f)
-//            .title(name)
-//            .icon(BitmapDescriptorFactory.fromBitmap(R.drawable.ic_course_overlay.toBitmap(this, resizeProgress))))
         mMap.setOnMapLongClickListener { latLng: LatLng ->
             Log.d("CourseMapActivity", "Course placed at ${latLng.latitude}, ${latLng.longitude}")
 
@@ -102,13 +90,26 @@ class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
                         )
                         .position(latLng, 26f)
                 )
+
+                undoButton.isEnabled = true
             }
 
-            undoButton.isEnabled = true
+
+            if (undoButton.isEnabled) {
+                coursePlaced = true
+                infoButton.text = getString(R.string.done)
+                infoButton.setBackgroundResource(R.color.colorPrimaryDark)
+            }
         }
 
         undoButton.setOnClickListener {
+
             courseOverlay.remove()
+
+            // Change info button back to default instructions b/c course has been removed from the map
+            infoButton.text = getString(R.string.course_placement_instructions)
+            infoButton.setBackgroundResource(android.R.color.holo_red_light)
+
             undoButton.isEnabled = false
         }
 
