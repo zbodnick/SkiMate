@@ -1,19 +1,19 @@
 package com.bodnick.skimate
 
-import android.content.res.Resources
-import android.graphics.drawable.Drawable
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.model.LatLng
 import com.squareup.picasso.Picasso
 
 
-class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
+class CourseAdapter(val courses: List<Course>, val context: Context, val activity: Activity) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
 
     // The adapter needs to render a new row and needs to know what XML file to use
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,9 +34,21 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
         holder.precipitation.text = currentCourse.precipitation
         holder.wind.text = currentCourse.wind
 
-        val lat = currentCourse.lat.toDouble()
-        val lng = currentCourse.lng.toDouble()
-        val location = LatLng(lat, lng)
+        val lat = currentCourse.lat
+        val lng = currentCourse.lng
+
+        holder.viewCourseButton.setOnClickListener {
+            // Click listener for view course button
+            val intent = Intent(context, CourseMapEditActivity::class.java)
+
+            intent.putExtra("lat", courses[position].lat)
+            intent.putExtra("lng", courses[position].lng)
+            intent.putExtra("name", courses[position].name)
+
+            context.startActivity(intent)
+
+            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
 
         val apiKey = "AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA"
 
@@ -66,9 +78,6 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
             "50d" -> holder.weatherIcon.setImageResource(R.drawable.ic_50d);
             "50n" -> holder.weatherIcon.setImageResource(R.drawable.ic_50n);
         }
-
-
-
 //
 //        mMap.addMarker(MarkerOptions().position(location).title(currentCourse.name))
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
@@ -79,22 +88,12 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
 //            holder. .isVisible = false
 //        }
 
-//    val webIntent: Intent = Intent(Intent.ACTION_CALL, Uri.parse(currentBusiness.url))
-//    val phoneIntent: Intent = Intent(Intent.ACTION_CALL, Uri.parse(currentBusiness.url))
-//
-//    holder.url.setOnClickListener(View.OnClickListener {
-//        val intent = Intent(Intent.ACTION_VIEW)
-//        intent.data = Uri.parse(businesses[holder.adapterPosition].url)
-//        holder.startActivity(intent)
-//    })
-
     }
 
     // Return the total number of rows you expect your list to have
     override fun getItemCount(): Int {
         return courses.size
     }
-
 
     // A ViewHolder represents the Views that comprise a single row in our list (e.g.
     // our row to display a Business contains three TextViews and one ImageView).
@@ -113,6 +112,8 @@ class CourseAdapter(val courses: List<Course>) : RecyclerView.Adapter<CourseAdap
         val weatherIcon: ImageView = itemView.findViewById(R.id.course_current_weather_icon)
 
         val mapView: ImageView = itemView.findViewById(R.id.course_thumbnail)
+
+        val viewCourseButton: ImageButton = itemView.findViewById(R.id.view_course_button)
 
     }
 

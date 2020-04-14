@@ -4,5 +4,10 @@
     <color name="colorPrimaryDark">#0082FF</color>
     <color name="colorAccent">#81AFFB</color>
     <color name="mutedText">#dfeaff</color>
+    <color name="mutedGreyTransparent">#99dfeaff</color>
     <color name="defaultGrey">#F5F5F5</color>
+    <color name="opaqueDarkerGrey">#80121212</color>
+    <color name="opaqueDarkerGreyLight">#20121212</color>
+    <color name="darkerGrey">#121212</color>
+    <color name="iconBackgroundGrey">#d7d7d7</color>
 </resources>
