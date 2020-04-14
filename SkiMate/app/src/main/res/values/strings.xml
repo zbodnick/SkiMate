@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">SkiMate</string>
     <string name="password">password</string>
+
+    <string name="name_tag">Title</string>
+    <string name="address">Address</string>
+
     <string name="login">LOGIN</string>
     <string name="signup">New to Ski Mate? Sign up</string>
     <string name="signup_button">Sign up</string>
@@ -9,7 +13,7 @@
     <string name="logo">logo</string>
     <string name="manager_title">Course Manager</string>
     <string name="todo">TODO</string>
-    <string name="title_activity_course_map">Map</string>
+    <string name="title_activity_course_map">Course Editor</string>
     <string name="done">Done</string>
     <string name="rotate_title">ROTATE</string>
     <string name="course_placement_instructions"> Long Press to Place Slalom Course</string>

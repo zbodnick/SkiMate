@@ -2,7 +2,7 @@ package com.bodnick.skimate
 
 data class Course (
     var name: String?,
-    var location: String?,
+    var location: String,
     var lat: String,
     var lng: String,
     var weatherIcon: String?,
