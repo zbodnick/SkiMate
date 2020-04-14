@@ -81,8 +81,8 @@ class CourseManagerActivity : AppCompatActivity() {
             Course (
                 name = "PB Water Sports",
                 location = "Stub Canal",
-                lat = "26.685553",
-                lng = "-80.073359",
+                lat = "26.682656",
+                lng = "-80.071766",
                 weatherIcon = " ",
                 temp = "77°F",
                 precipitation = "32%",
