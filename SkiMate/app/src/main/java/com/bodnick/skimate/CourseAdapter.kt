@@ -3,15 +3,12 @@ package com.bodnick.skimate
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
@@ -42,7 +39,7 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
 
         holder.viewCourseButton.setOnClickListener {
             // Click listener for view course button
-            val intent = Intent(context, CourseMapActivity::class.java)
+            val intent = Intent(context, CourseMapEditActivity::class.java)
 
             intent.putExtra("lat", courses[position].lat)
             intent.putExtra("lng", courses[position].lng)

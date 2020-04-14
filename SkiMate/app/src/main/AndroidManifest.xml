@@ -31,7 +31,7 @@
             android:value="AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA" />
 
         <activity
-            android:name=".CourseMapActivity"
+            android:name=".CourseMapEditActivity"
             android:label="@string/title_activity_course_map"></activity>
         <activity
             android:name=".CourseManagerActivity"

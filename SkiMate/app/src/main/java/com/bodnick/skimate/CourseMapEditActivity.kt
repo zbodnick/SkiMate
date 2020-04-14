@@ -18,7 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 
-class CourseMapActivity : AppCompatActivity(), OnMapReadyCallback {
+class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var rotateSeekbar: SeekBar
