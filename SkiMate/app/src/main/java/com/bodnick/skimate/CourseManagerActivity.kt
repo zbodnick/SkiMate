@@ -1,11 +1,8 @@
 package com.bodnick.skimate
 
-import android.app.Dialog
-import android.content.DialogInterface
 import android.os.Bundle
-import android.text.InputType
-import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -52,35 +49,45 @@ class CourseManagerActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
 
         addCourseButton.setOnClickListener {
-            createCourseDialog()
-            Toast.makeText(
-                this,
-                "Made it!",
-                Toast.LENGTH_SHORT
-            ).show()
+
+            val dialog = createCourseDialog()
+
+            dialog.show()
+
+            val name = dialog.findViewById<EditText>(R.id.new_name)
+            val address = dialog.findViewById<EditText>(R.id.new_address)
+
+            val addButton = dialog.findViewById<Button>(R.id.addButton)
+            val cancelButton = dialog.findViewById<Button>(R.id.cancelButton)
+
+            dialog.findViewById<Button>(R.id.addButton)?.setText(R.string.add)
+            dialog.findViewById<Button>(R.id.cancelButton)?.setText(R.string.cancel)
+
+            addButton?.setOnClickListener(View.OnClickListener {
+                // GO TO CourseMapEditActivity
+            })
+
+            cancelButton?.setOnClickListener(View.OnClickListener {
+                dialog.dismiss()
+            })
         }
 
     }
 
 
-    private fun createCourseDialog() {
+    private fun createCourseDialog(): AlertDialog {
         val builder = AlertDialog.Builder(this)
         // Get the layout inflater
-        val inflater = this.layoutInflater;
+        val inflater = this.layoutInflater
 
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the manager layout
         builder.setView(inflater.inflate(R.layout.dialog_create_course, null))
-            .setPositiveButton(R.string.add,
-                DialogInterface.OnClickListener { dialog, id ->
-                    // GO TO EDIT COURSE ACTIVITY W/ EXTRAS
-                })
-            .setNegativeButton(R.string.cancel,
-                DialogInterface.OnClickListener { dialog, id ->
-                    dialog.dismiss()
-                })
+
         val dialog = builder.create()
-        dialog.show()
+
+        return dialog
+
     }
 
     private fun updateCourses(courses: List<Course>) {
