@@ -2,8 +2,6 @@
     <string name="app_name">SkiMate</string>
     <string name="password">password</string>
 
-    <string name="name_tag">Title</string>
-    <string name="address">Address</string>
 
     <string name="login">LOGIN</string>
     <string name="signup">New to Ski Mate? Sign up</string>
@@ -18,6 +16,15 @@
     <string name="rotate_title">ROTATE</string>
     <string name="course_placement_instructions"> Long Press to Place Slalom Course</string>
 
+
+<!--    API Strings-->
     <string name="openWeatherAPI">ccd0e2c49b12698e5c8b1ccf07dd6f5a</string>
     <string name="google_maps_key">AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA</string>
+
+<!--    Dialog Strings-->
+    <string name="name_tag">Title</string>
+    <string name="address">Address</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+
 </resources>
