@@ -40,6 +40,9 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
     var name: String = ""
     var location: String = ""
 
+    var course_lat: String = ""
+    var course_lng: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_map)
@@ -81,7 +84,7 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                 val bearing = courseOverlay.bearing.toString()
 
                 if (name.isNotEmpty() && location.isNotEmpty()) {
-                    val course = Course(name, location, lat, lng, "", "", "", "", bearing)
+                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", bearing)
                     reference.push().setValue(course)
 
                     val intent = Intent(this@CourseMapEditActivity, CourseManagerActivity::class.java)
@@ -128,6 +131,10 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                         )
                         .position(latLng, 26f)
                 )
+
+
+                course_lat = latLng.latitude.toString()
+                course_lng = latLng.longitude.toString()
 
                 undoButton.isEnabled = true
             }
