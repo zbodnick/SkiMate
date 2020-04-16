@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "762198651694",
+    "firebase_url": "https://ski-mate.firebaseio.com",
+    "project_id": "ski-mate",
+    "storage_bucket": "ski-mate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762198651694:android:707477557dd537d17680bf",
+        "android_client_info": {
+          "package_name": "com.bodnick.skimate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762198651694-s9ap90uqlg8secp4d2nmkilcsgtkegdp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_9AXDdkCn0_2ylC2VUfZiUHIfbNi5gCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "762198651694-s9ap90uqlg8secp4d2nmkilcsgtkegdp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
