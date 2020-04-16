@@ -1,9 +1,10 @@
 package com.bodnick.skimate
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
@@ -11,12 +12,14 @@ import android.widget.ImageButton
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.GroundOverlay
+import com.google.android.gms.maps.model.GroundOverlayOptions
+import com.google.android.gms.maps.model.LatLng
 
 class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -70,8 +73,9 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val lat = intent.getStringExtra("lat")
-        val lng = intent.getStringExtra("lng")
+        val lat = intent.getStringExtra("address")
+        val lng = intent.getStringExtra("address")
+
         val name = intent.getStringExtra("name")
 
         val course = LatLng(lat.toDouble(), lng.toDouble())
@@ -116,8 +120,8 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
             undoButton.isEnabled = false
         }
 
-        val zoomLevel = 16.0f
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(course, zoomLevel))
+        val zoomLevel = 18.0f
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(course, zoomLevel))
     }
 
     private fun Int.toBitmap(context: Context): Bitmap? {

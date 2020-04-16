@@ -1,7 +1,11 @@
 package com.bodnick.skimate
 
+import android.content.Intent
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -23,7 +27,7 @@ class CourseManagerActivity : AppCompatActivity() {
     private lateinit var updatedCourses: List<Course>
 
     private var newCourseName: String = ""
-    private var newCourseAddress: String = ""
+    private var newCourseAddressList: List<Address> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +68,47 @@ class CourseManagerActivity : AppCompatActivity() {
             dialog.findViewById<Button>(R.id.cancelButton)?.setText(R.string.cancel)
 
             addButton?.setOnClickListener(View.OnClickListener {
-                // GO TO CourseMapEditActivity
+
+                // Geocode inputted address
+                getGeocode(name?.text.toString())
+
+                val destinations = convertAddressList(newCourseAddressList)
+                val arrayAdapter =
+                    ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice)
+                arrayAdapter.addAll(destinations)
+
+                if (destinations.isNotEmpty()) {
+
+                    android.app.AlertDialog.Builder(this)
+                        .setTitle("Search Results")
+                        .setAdapter(arrayAdapter) { dialog, which ->
+
+                            val intent = Intent(this, CourseMapEditActivity::class.java)
+
+                            val lat: String? = newCourseAddressList[which].latitude.toString()
+                            val lng: String? = newCourseAddressList[which].longitude.toString()
+
+                            intent.putExtra("name", name?.text.toString())
+                            intent.putExtra("lat", lat)
+                            intent.putExtra("lat", lng)
+
+                            this.startActivity(intent)
+                            this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                            Toast.makeText(
+                                this,
+                                "Locating course at ${destinations[which]}...",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        .setNegativeButton("CANCEL") { dialog, which ->
+                            dialog.dismiss()
+                        }
+                        .show()
+                } else {
+                    throwError(0)
+                    Toast.makeText(this, "${name?.text.toString()}", Toast.LENGTH_SHORT).show()
+
+                }
             })
 
             cancelButton?.setOnClickListener(View.OnClickListener {
@@ -74,6 +118,41 @@ class CourseManagerActivity : AppCompatActivity() {
 
     }
 
+    private fun throwError(errorCode: Int) {
+        val errorArr = resources.getStringArray(R.array.errors_array)
+        Toast.makeText(this, "${errorArr[errorCode]}", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun getGeocode(address: String) {
+
+        doAsync {
+            val geocoder = Geocoder(this@CourseManagerActivity)
+            newCourseAddressList = try {
+
+                geocoder.getFromLocationName(address, 5)
+
+            } catch (exception: Exception) {
+                Toast.makeText(this@CourseManagerActivity, "${exception.printStackTrace()}", Toast.LENGTH_SHORT).show()
+
+                listOf<Address>()
+            }
+        }
+    }
+
+    private fun convertAddressList(addressList: List<Address>): MutableList<String> {
+
+        val convertedList: MutableList<String> = arrayListOf()
+
+        addressList.forEachIndexed { index, element ->
+
+            val address: String = addressList[index].getAddressLine(index)
+//            Toast.makeText(this, "${address}", Toast.LENGTH_SHORT).show()
+
+            convertedList.add(address)
+        }
+
+        return convertedList
+    }
 
     private fun createCourseDialog(): AlertDialog {
         val builder = AlertDialog.Builder(this)

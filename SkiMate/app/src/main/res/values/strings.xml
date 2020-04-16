@@ -16,6 +16,11 @@
     <string name="rotate_title">ROTATE</string>
     <string name="course_placement_instructions"> Long Press to Place Slalom Course</string>
 
+<!--Error Strings-->
+    <string-array name="errors_array">
+        <item>Error: please input a valid address</item>
+
+    </string-array>
 
 <!--    API Strings-->
     <string name="openWeatherAPI">ccd0e2c49b12698e5c8b1ccf07dd6f5a</string>

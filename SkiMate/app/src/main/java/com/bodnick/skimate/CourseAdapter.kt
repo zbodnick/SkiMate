@@ -39,15 +39,15 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
 
         holder.viewCourseButton.setOnClickListener {
             // Click listener for view course button
-            val intent = Intent(context, CourseMapEditActivity::class.java)
-
-            intent.putExtra("lat", courses[position].lat)
-            intent.putExtra("lng", courses[position].lng)
-            intent.putExtra("name", courses[position].name)
-
-            context.startActivity(intent)
-
-            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+//            val intent = Intent(context, CourseMapEditActivity::class.java)
+//
+//            intent.putExtra("lat", courses[position].lat)
+//            intent.putExtra("lng", courses[position].lng)
+//            intent.putExtra("name", courses[position].name)
+//
+//            context.startActivity(intent)
+//
+//            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         val apiKey = "AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA"
