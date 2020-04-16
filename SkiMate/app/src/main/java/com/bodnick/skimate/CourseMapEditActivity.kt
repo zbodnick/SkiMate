@@ -74,16 +74,14 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
         infoButton.setOnClickListener {
             if (coursePlaced) {
 
-                // TODO - MAKE SURE COURSE NAMES ARE UNIQUE
-
-                val reference = fbDatabase.getReference("courses/$name")
+                val reference = fbDatabase.getReference("courses/")
                 val currentUser = FirebaseAuth.getInstance().currentUser
 
                 val bearing = courseOverlay.bearing.toString()
 
                 if (name.isNotEmpty() && location.isNotEmpty()) {
                     val course = Course(name, location, lat, lng, "", "", "", "", bearing)
-                    reference.setValue(course)
+                    reference.push().setValue(course)
                 }
             }
         }
