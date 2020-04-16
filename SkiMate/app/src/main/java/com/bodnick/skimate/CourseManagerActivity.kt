@@ -14,7 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.jetbrains.anko.doAsync
 
 class CourseManagerActivity : AppCompatActivity() {
@@ -29,7 +32,6 @@ class CourseManagerActivity : AppCompatActivity() {
 
     private lateinit var updatedCourses: List<Course>
 
-    private var newCourseName: String = ""
     private var newCourseAddressList: List<Address> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,13 +53,30 @@ class CourseManagerActivity : AppCompatActivity() {
         // Set the RecyclerView direction to vertical (the default)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val courses = getCourses()
 
-        adapter = CourseAdapter(courses, this, this)
-        recyclerView.adapter = adapter
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(
+                    this@CourseManagerActivity,
+                    "Failed to retrieve Courses Error: ${databaseError.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
 
-        updateCourses(courses)
-        adapter.notifyDataSetChanged()
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val courses = mutableListOf<Course>()
+                dataSnapshot.children.forEach { data ->
+                    val course = data.getValue(Course::class.java)
+                    if (course != null) {
+                        courses.add(course)
+                    }
+                }
+                adapter = CourseAdapter(courses, this@CourseManagerActivity, this@CourseManagerActivity)
+                recyclerView.adapter = adapter
+                updateCourses(courses)
+                adapter.notifyDataSetChanged()
+            }
+        })
 
         addCourseButton.setOnClickListener {
 

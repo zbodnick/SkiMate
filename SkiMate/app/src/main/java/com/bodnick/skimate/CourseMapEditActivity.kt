@@ -1,6 +1,7 @@
 package com.bodnick.skimate
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.location.Address
@@ -82,6 +83,10 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                 if (name.isNotEmpty() && location.isNotEmpty()) {
                     val course = Course(name, location, lat, lng, "", "", "", "", bearing)
                     reference.push().setValue(course)
+
+                    val intent = Intent(this@CourseMapEditActivity, CourseManagerActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
                 }
             }
         }
