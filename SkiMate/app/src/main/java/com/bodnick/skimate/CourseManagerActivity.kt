@@ -83,14 +83,14 @@ class CourseManagerActivity : AppCompatActivity() {
                         .setTitle("Search Results")
                         .setAdapter(arrayAdapter) { dialog, which ->
 
-                            val intent = Intent(this, CourseMapEditActivity::class.java)
+                            val intent = Intent(this@CourseManagerActivity, CourseMapEditActivity::class.java)
 
-                            val lat: String? = newCourseAddressList[which].latitude.toString()
-                            val lng: String? = newCourseAddressList[which].longitude.toString()
+                            val lat = newCourseAddressList[which].latitude.toString()
+                            val lng = newCourseAddressList[which].longitude.toString()
 
                             intent.putExtra("name", name?.text.toString())
                             intent.putExtra("lat", lat)
-                            intent.putExtra("lat", lng)
+                            intent.putExtra("lng", lng)
 
                             this.startActivity(intent)
                             this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

@@ -73,8 +73,8 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val lat = intent.getStringExtra("address")
-        val lng = intent.getStringExtra("address")
+        val lat = intent.getStringExtra("lat").toString()
+        val lng = intent.getStringExtra("lng").toString()
 
         val name = intent.getStringExtra("name")
 
