@@ -8,6 +8,6 @@ data class Course (
     var weatherIcon: String?,
     var temp: String?,
     var precipitation: String?,
-    var wind: String?
+    var wind: String?,
+    var bearing: String
 )
-

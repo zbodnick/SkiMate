@@ -96,7 +96,7 @@ class CourseManagerActivity : AppCompatActivity() {
                             val lng = newCourseAddressList[which].longitude.toString()
 
                             intent.putExtra("name", name?.text.toString())
-                            intent.putExtra("address", newCourseAddressList[which].toString())
+                            intent.putExtra("address", newCourseAddressList[which].getAddressLine(which).toString())
                             intent.putExtra("lat", lat)
                             intent.putExtra("lng", lng)
 
@@ -219,7 +219,8 @@ class CourseManagerActivity : AppCompatActivity() {
                 weatherIcon = " ",
                 temp = "77°F",
                 precipitation = "32%",
-                wind = "10mph"
+                wind = "10mph",
+                bearing = "1"
             ),
             Course (
                 name = "PB Training Center",
@@ -229,7 +230,8 @@ class CourseManagerActivity : AppCompatActivity() {
                 weatherIcon = " ",
                 temp = "84°F",
                 precipitation = "0%",
-                wind = "6mph"
+                wind = "6mph",
+                bearing = "1"
             ),
             Course (
                 name = "Camp Ramah",
@@ -239,7 +241,8 @@ class CourseManagerActivity : AppCompatActivity() {
                 weatherIcon = " ",
                 temp = "54°F",
                 precipitation = "8%",
-                wind = "12mph"
+                wind = "12mph",
+                bearing = "1"
             )
         )
     }
