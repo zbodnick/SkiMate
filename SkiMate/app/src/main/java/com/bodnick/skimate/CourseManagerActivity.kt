@@ -14,9 +14,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.database.FirebaseDatabase
 import org.jetbrains.anko.doAsync
 
 class CourseManagerActivity : AppCompatActivity() {
+
+    private lateinit var fbDatabase: FirebaseDatabase
 
     private lateinit var recyclerView: RecyclerView
 
@@ -32,6 +35,10 @@ class CourseManagerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_manager)
+
+        // Initialize db
+        fbDatabase = FirebaseDatabase.getInstance()
+        val reference = fbDatabase.getReference("courses/")
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
@@ -89,6 +96,7 @@ class CourseManagerActivity : AppCompatActivity() {
                             val lng = newCourseAddressList[which].longitude.toString()
 
                             intent.putExtra("name", name?.text.toString())
+                            intent.putExtra("address", newCourseAddressList[which].toString())
                             intent.putExtra("lat", lat)
                             intent.putExtra("lng", lng)
 

@@ -20,8 +20,12 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.GroundOverlay
 import com.google.android.gms.maps.model.GroundOverlayOptions
 import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    private lateinit var fbDatabase: FirebaseDatabase
 
     private lateinit var mMap: GoogleMap
     private lateinit var rotateSeekbar: SeekBar
@@ -30,9 +34,16 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
     private var coursePlaced: Boolean = false
     private lateinit var courseOverlay: GroundOverlay
 
+    var lat: String = ""
+    var lng: String = ""
+    var name: String = ""
+    var location: String = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_map)
+
+        fbDatabase = FirebaseDatabase.getInstance()
 
         rotateSeekbar = findViewById(R.id.rotateSeekBar)
         undoButton = findViewById(R.id.undoButton)
@@ -60,6 +71,19 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
+        infoButton.setOnClickListener {
+            if (coursePlaced) {
+
+                val reference = fbDatabase.getReference("courses/")
+                val currentUser = FirebaseAuth.getInstance().currentUser
+
+                if (name.isNotEmpty() && location.isNotEmpty()) {
+                    val course = Course(name, location, lat, lng, "", "", "", "")
+                    reference.setValue(course)
+                }
+            }
+        }
+
     }
 
     /**
@@ -73,10 +97,12 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val lat = intent.getStringExtra("lat").toString()
-        val lng = intent.getStringExtra("lng").toString()
+        lat = intent.getStringExtra("lat").toString()
+        lng = intent.getStringExtra("lng").toString()
 
-        val name = intent.getStringExtra("name")
+        location = intent.getStringExtra("address").toString()
+
+        name = intent.getStringExtra("name")
 
         val course = LatLng(lat.toDouble(), lng.toDouble())
 

@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.FirebaseDatabase
+
 //import sun.jvm.hotspot.utilities.IntArray
 
 
@@ -26,24 +28,6 @@ import com.google.firebase.auth.FirebaseUser
 
 
 class MainActivity : AppCompatActivity() {
-
-    /*
-
-    We use `lateinit var` for our UI variables because they cannot be initialized until
-    setContentView(...) is called in onCreate(...) below.
-
-    For example, this line would cause a crash:
-        private val username: EditText = findViewById(R.id.username)
-
-    Alternatively, could also use a nullable variable, but it'd be inconvenient to do a null-check on each usage:
-        private var username: EditText? = null
-
-    So `lateinit var` acts as a "promise" to the compiler that we cannot initialize the variable right now,
-    but we will later *and* when we do it'll be non-null.
-
-    If you forget to initialize a `lateinit` and then try and use it, the app will crash.
-
-    */
 
     private lateinit var firebaseAuth: FirebaseAuth
 
