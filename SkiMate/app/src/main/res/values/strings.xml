@@ -17,7 +17,7 @@
     <string name="course_placement_instructions"> Long Press to Place Slalom Course</string>
 
     <string name="new_course_title">New Course</string>
-
+    <string name="my_courses_title">My Courses</string>
     <!--Error Strings-->
     <string-array name="errors_array">
         <item>Error: please input a valid address</item>

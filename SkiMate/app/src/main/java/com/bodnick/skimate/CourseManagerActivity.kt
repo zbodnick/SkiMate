@@ -28,7 +28,7 @@ class CourseManagerActivity : AppCompatActivity() {
 
     private lateinit var adapter: CourseAdapter
 
-    private lateinit var addCourseButton: FloatingActionButton
+    private lateinit var addCourseButton: Button
 
     private lateinit var updatedCourses: List<Course>
 
