@@ -96,7 +96,7 @@ class CourseManagerActivity : AppCompatActivity() {
             dialog.findViewById<Button>(R.id.cancelButton)?.setText(R.string.cancel)
 
             addButton?.setOnClickListener(View.OnClickListener {
-
+                getGeocode(address?.text.toString())
                 if (geocodedLocation.address.isEmpty() || geocodedLocation.lat.isEmpty() || geocodedLocation.lng.isEmpty()) {
                     // Geocode inputted address
                     getGeocode(address?.text.toString())
