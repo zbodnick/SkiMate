@@ -4,36 +4,57 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.location.Address
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.GroundOverlay
+import com.google.android.gms.maps.model.GroundOverlayOptions
+import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    private lateinit var fbDatabase: FirebaseDatabase
 
     private lateinit var mMap: GoogleMap
     private lateinit var rotateSeekbar: SeekBar
     private lateinit var undoButton: ImageButton
     private lateinit var infoButton: Button
+    private lateinit var editNameText: EditText
     private var coursePlaced: Boolean = false
     private lateinit var courseOverlay: GroundOverlay
+
+    var lat: String = ""
+    var lng: String = ""
+    var name: String = ""
+    var location: String = ""
+
+    var course_lat: String = ""
+    var course_lng: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_map)
 
+        fbDatabase = FirebaseDatabase.getInstance()
+
         rotateSeekbar = findViewById(R.id.rotateSeekBar)
         undoButton = findViewById(R.id.undoButton)
         infoButton = findViewById(R.id.place_course_button)
+        editNameText = findViewById(R.id.editCourseName)
 
         rotateSeekbar.isEnabled = false
         undoButton.isEnabled = false
@@ -57,6 +78,28 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
+        infoButton.setOnClickListener {
+            if (coursePlaced) {
+
+                val reference = fbDatabase.getReference("courses/")
+                val currentUser = FirebaseAuth.getInstance().currentUser
+
+                val bearing = courseOverlay.bearing.toString()
+
+                if (name.isNotEmpty() && location.isNotEmpty()) {
+                    if  (editNameText.text.toString().isNotEmpty()) {
+                        name = editNameText.text.toString()
+                    }
+                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", bearing)
+                    reference.push().setValue(course)
+
+                    val intent = Intent(this@CourseMapEditActivity, CourseManagerActivity::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                }
+            }
+        }
+
     }
 
     /**
@@ -70,9 +113,13 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val lat = intent.getStringExtra("lat")
-        val lng = intent.getStringExtra("lng")
-        val name = intent.getStringExtra("name")
+        lat = intent.getStringExtra("lat").toString()
+        lng = intent.getStringExtra("lng").toString()
+
+        location = intent.getStringExtra("address").toString()
+
+        name = intent.getStringExtra("name")
+        editNameText.setText(name)
 
         val course = LatLng(lat.toDouble(), lng.toDouble())
 
@@ -91,6 +138,10 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                         )
                         .position(latLng, 26f)
                 )
+
+
+                course_lat = latLng.latitude.toString()
+                course_lng = latLng.longitude.toString()
 
                 undoButton.isEnabled = true
             }
@@ -116,8 +167,8 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
             undoButton.isEnabled = false
         }
 
-        val zoomLevel = 16.0f
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(course, zoomLevel))
+        val zoomLevel = 18.0f
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(course, zoomLevel))
     }
 
     private fun Int.toBitmap(context: Context): Bitmap? {

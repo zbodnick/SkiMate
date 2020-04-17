@@ -12,7 +12,7 @@
     >
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/courseCard"
         android:layout_width="379dp"
         android:layout_height="326dp"
         android:layout_marginLeft="10dp"
@@ -52,14 +52,14 @@
 
             <TextView
                 android:id="@+id/course_location"
-                android:layout_width="141dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="4dp"
+                android:layout_width="231dp"
+                android:layout_height="21dp"
+                android:layout_marginStart="8dp"
                 android:text="Stub Canal"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/course_current_weather_icon"
-                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_name"
                 app:layout_constraintVertical_bias="0.0" />
@@ -69,6 +69,7 @@
                 android:layout_width="218dp"
                 android:layout_height="29dp"
                 android:layout_marginStart="12dp"
+                android:layout_marginEnd="16dp"
                 android:text="Chip's Course"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="22sp"
@@ -78,7 +79,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/course_thumbnail"
-                app:layout_constraintVertical_bias="0.163" />
+                app:layout_constraintVertical_bias="0.166" />
 
             <ImageButton
                 android:id="@+id/view_course_button"
@@ -115,7 +116,6 @@
                 android:layout_height="25dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="1dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
                 android:gravity="center_vertical"
                 android:text="10mph"
