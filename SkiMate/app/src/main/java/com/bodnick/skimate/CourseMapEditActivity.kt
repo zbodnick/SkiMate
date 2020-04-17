@@ -9,6 +9,7 @@ import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +33,7 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var rotateSeekbar: SeekBar
     private lateinit var undoButton: ImageButton
     private lateinit var infoButton: Button
+    private lateinit var editNameText: EditText
     private var coursePlaced: Boolean = false
     private lateinit var courseOverlay: GroundOverlay
 
@@ -52,6 +54,7 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
         rotateSeekbar = findViewById(R.id.rotateSeekBar)
         undoButton = findViewById(R.id.undoButton)
         infoButton = findViewById(R.id.place_course_button)
+        editNameText = findViewById(R.id.editCourseName)
 
         rotateSeekbar.isEnabled = false
         undoButton.isEnabled = false
@@ -84,6 +87,9 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                 val bearing = courseOverlay.bearing.toString()
 
                 if (name.isNotEmpty() && location.isNotEmpty()) {
+                    if  (editNameText.text.toString().isNotEmpty()) {
+                        name = editNameText.text.toString()
+                    }
                     val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", bearing)
                     reference.push().setValue(course)
 
@@ -113,6 +119,7 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
         location = intent.getStringExtra("address").toString()
 
         name = intent.getStringExtra("name")
+        editNameText.setText(name)
 
         val course = LatLng(lat.toDouble(), lng.toDouble())
 

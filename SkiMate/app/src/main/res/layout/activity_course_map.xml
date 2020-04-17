@@ -45,15 +45,14 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
-        android:layout_width="396dp"
-        android:layout_height="125dp"
+        android:layout_width="395dp"
+        android:layout_height="183dp"
         android:background="@drawable/round_outline_shadow"
         android:foreground="@drawable/top_rounded_corners"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.461"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="@+id/map"
         map:layout_constraintVertical_bias="1.0" />
@@ -63,16 +62,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/rotate_title"
         android:textColor="@color/opaqueDarkerGrey"
         android:textSize="24sp"
         android:textStyle="bold"
         map:layout_constraintBottom_toBottomOf="@+id/map"
         map:layout_constraintEnd_toStartOf="@+id/rotateSeekBar"
-        map:layout_constraintHorizontal_bias="0.433"
+        map:layout_constraintHorizontal_bias="0.587"
         map:layout_constraintStart_toStartOf="@+id/toolbar"
         map:layout_constraintTop_toTopOf="@+id/toolbar"
-        map:layout_constraintVertical_bias="0.0" />
+        map:layout_constraintVertical_bias="0.802" />
 
     <Button
         android:id="@+id/place_course_button"
@@ -89,14 +89,14 @@
         map:layout_constraintHorizontal_bias="0.492"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="@+id/toolbar"
-        map:layout_constraintVertical_bias="0.68" />
+        map:layout_constraintVertical_bias="0.182" />
 
     <SeekBar
         android:id="@+id/rotateSeekBar"
         style="@style/Widget.AppCompat.SeekBar"
         android:layout_width="216dp"
         android:layout_height="60dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="120dp"
         android:max="180"
         android:min="0"
         android:paddingTop="0dp"
@@ -104,9 +104,24 @@
         android:progressTint="@color/darkerGrey"
         android:progressTintMode="src_atop"
         map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.866"
+        map:layout_constraintHorizontal_bias="0.825"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/editCourseName"
+        android:layout_width="331dp"
+        android:layout_height="39dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/name_tag"
+        android:textColor="@android:color/darker_gray"
+        map:layout_constraintBottom_toTopOf="@+id/rotateSeekBar"
+        map:layout_constraintEnd_toEndOf="@+id/toolbar"
+        map:layout_constraintHorizontal_bias="0.555"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="@+id/toolbarShadow"
+        map:layout_constraintVertical_bias="0.68" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

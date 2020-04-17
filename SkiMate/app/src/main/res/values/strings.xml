@@ -27,7 +27,7 @@
     <string name="google_maps_key">AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA</string>
 
 <!--    Dialog Strings-->
-    <string name="name_tag">Title</string>
+    <string name="name_tag">Name</string>
     <string name="address">Address</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
