@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
@@ -18,7 +19,7 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
     // The adapter needs to render a new row and needs to know what XML file to use
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         // Layout inflation (read & parse XML file and return a reference to the root layout)
-        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.activity_course_manager_row, parent, false)
+        val view: View = LayoutInflater.from(parent.context).inflate(R.layout.activity_course_manager_row_2, parent, false)
 
         return ViewHolder(view)
 

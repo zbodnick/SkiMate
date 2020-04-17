@@ -12,7 +12,7 @@
     >
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/courseCard"
         android:layout_width="379dp"
         android:layout_height="326dp"
         android:layout_marginLeft="10dp"
