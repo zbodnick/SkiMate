@@ -34,4 +34,7 @@
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
 
+    <string name="delete_course">Delete Course</string>
+    <string name="edit_course">Edit Course</string>
+
 </resources>

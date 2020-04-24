@@ -2,14 +2,13 @@ package com.bodnick.skimate
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
@@ -79,15 +78,30 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
             "50d" -> holder.weatherIcon.setImageResource(R.drawable.ic_50d);
             "50n" -> holder.weatherIcon.setImageResource(R.drawable.ic_50n);
         }
-//
-//        mMap.addMarker(MarkerOptions().position(location).title(currentCourse.name))
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(location))
-//        holder.map.onResume();// needed to get the map to display immediately
 
+        // Handle course menu listener - edit and delete
+        holder.editCourseButton.setOnClickListener(View.OnClickListener {
 
-//        if (currentCourse. .isEmpty()) {
-//            holder. .isVisible = false
-//        }
+            // Initialize popup menu
+            val popup = PopupMenu(context, holder.editCourseButton)
+
+            // Inflate menu from xml resource
+            popup.inflate(R.menu.course_menu)
+
+            // Add click listener
+            popup.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.delete_course_menu_item ->  //handle menu1 click
+                        true
+                    R.id.edit_course_menu_item ->  //handle menu2 click
+                        true
+                    else -> false
+                }
+            }
+
+            // Display the popup
+            popup.show()
+        })
 
     }
 
@@ -115,6 +129,8 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
         val mapView: ImageView = itemView.findViewById(R.id.course_thumbnail)
 
         val viewCourseButton: ImageButton = itemView.findViewById(R.id.view_course_button)
+
+        val editCourseButton: ImageButton = itemView.findViewById(R.id.edit_course_button)
 
     }
 

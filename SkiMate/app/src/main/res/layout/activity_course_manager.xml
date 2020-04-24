@@ -34,21 +34,22 @@ android:background="@color/defaultGrey"
                     android:foreground="@drawable/bottom_rounded_corners">
 
                     <Space
-                        android:layout_width="21dp"
-                        android:layout_height="33dp" />
+                        android:layout_width="25dp"
+                        android:layout_height="34dp" />
 
                     <TextView
                         android:id="@+id/myCoursesTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="50dp"
-                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="12dp"
                         android:text="@string/my_courses_title"
                         android:textColor="@color/darkerGrey"
                         android:textSize="32dp"
                         android:textStyle="bold" />
 
                     <Space
-                        android:layout_width="46dp"
+                        android:layout_width="27dp"
                         android:layout_height="33dp" />
 
                     <Button
