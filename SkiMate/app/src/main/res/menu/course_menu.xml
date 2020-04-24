@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <item android:title="">
-        android:id="@+id/edit_course_menu"
-        android:icon="@drawable/ic_more_vert_white"
-        android:title="@string/todo"
-        app:showAsAction="always">
-
-        <menu>
-            <item
-                android:id="@+id/delete_course_menu_item"
-                android:icon="@drawable/ic_delete_black_24dp"
-                android:title="@string/delete_course"
-                />
-            <item
-                android:id="@+id/edit_course_menu_item"
-                android:icon="@drawable/ic_edit_black_24dp"
-                android:title="@string/edit_course"
-                />
-        </menu>
-    </item>
+    <item
+        android:id="@+id/delete_course_menu_item"
+        android:icon="@drawable/ic_delete_black_24dp"
+        android:title="@string/delete_course"
+        />
+    <item
+        android:id="@+id/edit_course_menu_item"
+        android:icon="@drawable/ic_edit_black_24dp"
+        android:title="@string/edit_course"
+        />
 
 </menu>

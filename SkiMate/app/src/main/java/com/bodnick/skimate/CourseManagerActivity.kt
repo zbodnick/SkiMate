@@ -30,7 +30,7 @@ class CourseManagerActivity : AppCompatActivity() {
 
     private lateinit var addCourseButton: Button
 
-    private lateinit var updatedCourses: List<Course>
+    private lateinit var updatedCourses: MutableList<Course>
 
     private var geocodedLocation: Location = Location("", "", "")
 
@@ -194,7 +194,7 @@ class CourseManagerActivity : AppCompatActivity() {
 
     }
 
-    private fun updateCourses(courses: List<Course>) {
+    private fun updateCourses(courses: MutableList<Course>) {
         doAsync {
             val weatherManager = OpenWeatherManager()
 
@@ -205,7 +205,7 @@ class CourseManagerActivity : AppCompatActivity() {
                 updatedCourses = weatherManager.retrieveWeatherData (
                     apiKey = apiKey,
                     courses = courses
-                )
+                ) as MutableList<Course>
 
                 runOnUiThread {
                     adapter = CourseAdapter(updatedCourses, this@CourseManagerActivity, this@CourseManagerActivity)

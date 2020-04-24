@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
 
-class CourseAdapter(val courses: List<Course>, val context: Context, val activity: Activity) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
+class CourseAdapter(val courses: MutableList<Course>, val context: Context, val activity: Activity) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
 
     // The adapter needs to render a new row and needs to know what XML file to use
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -91,10 +91,15 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
             // Add click listener
             popup.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
-                    R.id.delete_course_menu_item ->  //handle menu1 click
+                    R.id.delete_course_menu_item ->  {
+                        courses.removeAt(position)
+                        notifyItemRemoved(position)
+                        notifyItemRangeChanged(position, courses.size)
                         true
-                    R.id.edit_course_menu_item ->  //handle menu2 click
+                    }
+                    R.id.edit_course_menu_item ->  {
                         true
+                    }
                     else -> false
                 }
             }
@@ -103,11 +108,6 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
             popup.show()
         })
 
-    }
-
-    // Return the total number of rows you expect your list to have
-    override fun getItemCount(): Int {
-        return courses.size
     }
 
     // A ViewHolder represents the Views that comprise a single row in our list (e.g.
@@ -132,6 +132,10 @@ class CourseAdapter(val courses: List<Course>, val context: Context, val activit
 
         val editCourseButton: ImageButton = itemView.findViewById(R.id.edit_course_button)
 
+    }
+
+    override fun getItemCount(): Int {
+        return courses.size
     }
 
 }
