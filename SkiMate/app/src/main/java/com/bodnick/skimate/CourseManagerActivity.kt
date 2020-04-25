@@ -1,8 +1,8 @@
 package com.bodnick.skimate
 
 import android.content.Intent
+import android.database.DataSetObserver
 import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -13,7 +13,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -55,7 +54,6 @@ class CourseManagerActivity : AppCompatActivity() {
         // Set the RecyclerView direction to vertical (the default)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-
         reference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(databaseError: DatabaseError) {
                 Toast.makeText(
@@ -78,7 +76,17 @@ class CourseManagerActivity : AppCompatActivity() {
                 updateCourses(courses)
                 adapter.notifyDataSetChanged()
             }
+
         })
+
+//        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+//            override fun onChanged() {
+//                var recentlyDeletedIndex = adapter.getRecentlyDeleted()
+//                if (recentlyDeletedIndex != 0) {
+//
+//                }
+//            }
+//        })
 
         addCourseButton.setOnClickListener {
 

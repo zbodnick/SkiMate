@@ -24,11 +24,11 @@
 
     </string-array>
 
-<!--    API Strings-->
+    <!--    API Strings-->
     <string name="openWeatherAPI">ccd0e2c49b12698e5c8b1ccf07dd6f5a</string>
     <string name="google_maps_key">AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA</string>
 
-<!--    Dialog Strings-->
+    <!--    Dialog Strings-->
     <string name="name_tag">Name</string>
     <string name="address">Address</string>
     <string name="add">Add</string>

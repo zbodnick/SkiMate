@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
+        var recentlyDeleted = 0;
 
 class CourseAdapter(val courses: MutableList<Course>, val context: Context, val activity: Activity) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
 
@@ -95,6 +96,7 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
                         courses.removeAt(position)
                         notifyItemRemoved(position)
                         notifyItemRangeChanged(position, courses.size)
+                        recentlyDeleted = position
                         true
                     }
                     R.id.edit_course_menu_item ->  {
@@ -136,6 +138,14 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
 
     override fun getItemCount(): Int {
         return courses.size
+    }
+
+    fun getCourseList(): MutableList<Course> {
+        return courses
+    }
+
+    fun getRecentlyDeleted(): Int {
+        return recentlyDeleted
     }
 
 }

@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MapsActivity"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <ImageButton
+        android:id="@+id/undoButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/colorAccent"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.954"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="@+id/map"
+        map:layout_constraintVertical_bias="0.029"
+        map:srcCompat="@drawable/ic_replay_black_24dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="388dp"
+        android:layout_height="140dp"
+        map:cardBackgroundColor="@android:color/white"
+        map:cardCornerRadius="16dp"
+        map:layout_constraintBottom_toBottomOf="parent"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="parent"
+        map:layout_constraintVertical_bias="0.958">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="18dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="29dp"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="22dp"
+                        android:layout_height="match_parent" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/daytext"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="SUN"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/daytext1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="MON"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/daytext2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="TUE"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+                    </TableRow>
+
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/daytext3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="WED"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+                    </TableRow>
+
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/darker_gray" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/daytext4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="THU"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+                    </TableRow>
+
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="22dp"
+                        android:layout_height="match_parent" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/course_current_weather_icon"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/todo" />
+
+                    </TableRow>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_height="match_parent"/>
+                    
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/course_current_weather_icon1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/todo" />
+
+                    </TableRow>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_height="match_parent"/>
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/course_current_weather_icon2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/todo" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/course_current_weather_icon3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/todo" />
+
+                    </TableRow>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_height="match_parent"/>
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/course_current_weather_icon4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/todo" />
+
+                    </TableRow>
+
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="26dp"
+                    android:orientation="horizontal">
+
+                    <Space
+                        android:layout_width="22dp"
+                        android:layout_height="match_parent" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/temptext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="77"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/darker_gray" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="28dp">
+
+                        <TextView
+                            android:id="@+id/temptext1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="85"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+
+                    </TableRow>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/darker_gray" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="28dp">
+
+                        <TextView
+                            android:id="@+id/temptext2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="80"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+                    </TableRow>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/darker_gray" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="28dp">
+
+                        <TextView
+                            android:id="@+id/temptext4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="82"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+                    </TableRow>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/darker_gray" />
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="28dp">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="90"
+                            android:textAlignment="center"
+                            android:textColor="@android:color/darker_gray"
+                            android:textSize="20sp" />
+                    </TableRow>
+
+                </LinearLayout>
+            </TableRow>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
