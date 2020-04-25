@@ -24,6 +24,7 @@ import com.google.android.gms.maps.model.GroundOverlayOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 
 class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -90,8 +91,10 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                     if  (editNameText.text.toString().isNotEmpty()) {
                         name = editNameText.text.toString()
                     }
-                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", bearing)
-                    reference.push().setValue(course)
+
+                    val id = genID()
+                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", bearing, id)
+                    reference.child(id).setValue(course)
 
                     val intent = Intent(this@CourseMapEditActivity, CourseManagerActivity::class.java)
                     startActivity(intent)
@@ -100,6 +103,10 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
+    }
+
+    fun genID(): String {
+        return UUID.randomUUID().toString()
     }
 
     /**

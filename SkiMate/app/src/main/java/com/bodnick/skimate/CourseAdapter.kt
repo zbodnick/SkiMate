@@ -5,14 +5,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
-
-        var recentlyDeleted = 0;
 
 class CourseAdapter(val courses: MutableList<Course>, val context: Context, val activity: Activity) : RecyclerView.Adapter<CourseAdapter.ViewHolder>() {
 
@@ -93,10 +92,10 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
             popup.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.delete_course_menu_item ->  {
+                        deleteCourse(courses[position])
                         courses.removeAt(position)
                         notifyItemRemoved(position)
                         notifyItemRangeChanged(position, courses.size)
-                        recentlyDeleted = position
                         true
                     }
                     R.id.edit_course_menu_item ->  {
@@ -109,6 +108,19 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
             // Display the popup
             popup.show()
         })
+
+    }
+
+    private fun deleteCourse(course: Course) {
+        val dbReference = FirebaseDatabase.getInstance().getReference("courses/")
+
+        dbReference.child(course.id).removeValue()
+
+        Toast.makeText(
+            context,
+            "Removing course with ID: ${course.id}",
+            Toast.LENGTH_SHORT
+        ).show()
 
     }
 
@@ -138,14 +150,6 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
 
     override fun getItemCount(): Int {
         return courses.size
-    }
-
-    fun getCourseList(): MutableList<Course> {
-        return courses
-    }
-
-    fun getRecentlyDeleted(): Int {
-        return recentlyDeleted
     }
 
 }

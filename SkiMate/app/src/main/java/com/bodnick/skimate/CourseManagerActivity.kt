@@ -79,15 +79,6 @@ class CourseManagerActivity : AppCompatActivity() {
 
         })
 
-//        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
-//            override fun onChanged() {
-//                var recentlyDeletedIndex = adapter.getRecentlyDeleted()
-//                if (recentlyDeletedIndex != 0) {
-//
-//                }
-//            }
-//        })
-
         addCourseButton.setOnClickListener {
 
             val dialog = createCourseDialog()

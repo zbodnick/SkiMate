@@ -1,6 +1,7 @@
 package com.bodnick.skimate
 
 import java.io.Serializable
+import java.util.*
 
 data class Course (
     var name: String?,
@@ -11,9 +12,11 @@ data class Course (
     var temp: String?,
     var precipitation: String?,
     var wind: String?,
-    var bearing: String
+    var bearing: String,
+    var id: String
 ) : Serializable {
     // Required by Firebase to cast to a custom object
     // Calls the primary constructor with default arguments
-    constructor() : this("","","","", "", "", "", "", "")
+    constructor() : this("","","","", "", "", "", "", "", "")
 }
+
