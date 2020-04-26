@@ -37,4 +37,8 @@
     <string name="delete_course">Delete Course</string>
     <string name="edit_course">Edit Course</string>
 
+    <string name="tempDay">MON</string>
+    <string name="tempTemp">76ºF</string>
+
+
 </resources>

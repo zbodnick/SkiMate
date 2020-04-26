@@ -5,6 +5,8 @@ import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.math.roundToInt
 
@@ -61,14 +63,30 @@ class OpenWeatherManager {
 
                     // UNIX timestamp
                     val timestamp: String? = forecast?.optString("dt")
-                    val temp: String? = tempObject?.optString("day")
+                    var temp: String? = tempObject?.optString("day")
                     val iconID: String? = weatherArray?.optString("icon")
+
+                    val sdf = SimpleDateFormat("EEEE")
+                    val dateFormat = Date((timestamp?.toLong() as Long) * 1000)
+                    var day: String = sdf.format(dateFormat)
+
+                    temp = "${temp?.toDouble()?.roundToInt().toString()}°F"
+
+                    when (day) {
+                        "Monday" -> day = "MON"
+                        "Tuesday" -> day = "TUE"
+                        "Wednesday" -> day = "WED"
+                        "Thursday" -> day = "THU"
+                        "Friday" -> day = "FRI"
+                        "Saturday" -> day = "SAT"
+                        "Sunday" -> day = "SUN"
+                    }
 
                     fiveDayForecast.add(
                         Forecast(
-                            timestamp as String,
-                            temp as String,
-                            iconID as String
+                            day,
+                            iconID as String,
+                            temp
                         )
                     )
                 }

@@ -59,7 +59,7 @@
                             android:layout_height="match_parent"
                             android:text="SUN"
                             android:textAlignment="center"
-                            android:textColor="@android:color/darker_gray"
+                            android:textColor="@android:color/white"
                             android:textSize="20sp" />
 
                     </TableRow>
@@ -79,7 +79,7 @@
                             android:layout_height="match_parent"
                             android:text="MON"
                             android:textAlignment="center"
-                            android:textColor="@android:color/darker_gray"
+                            android:textColor="@android:color/white"
                             android:textSize="20sp" />
 
                     </TableRow>
@@ -100,7 +100,7 @@
                             android:layout_height="match_parent"
                             android:text="TUE"
                             android:textAlignment="center"
-                            android:textColor="@android:color/darker_gray"
+                            android:textColor="@android:color/white"
                             android:textSize="20sp" />
                     </TableRow>
 

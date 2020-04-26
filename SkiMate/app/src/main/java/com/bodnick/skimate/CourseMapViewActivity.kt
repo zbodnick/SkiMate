@@ -76,35 +76,64 @@ class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         getForecast()
-        inflateForecast()
     }
 
     private fun inflateForecast() {
         forecasts.forEachIndexed { index, forecast ->
+            when (index) {
+                0 -> {
+                    dayText0.text = forecast.day
+                    setIcon(forecast.iconID, weatherIcon0)
+                    tempText0.text = forecast.temp
+                }
 
+                1 -> {
+                    dayText1.text = forecast.day
+                    setIcon(forecast.iconID, weatherIcon1)
+                    tempText1.text = forecast.temp
+                }
+
+                2 -> {
+                    dayText2.text = forecast.day
+                    setIcon(forecast.iconID, weatherIcon2)
+                    tempText2.text = forecast.temp
+                }
+
+                3 -> {
+                    dayText3.text = forecast.day
+                    setIcon(forecast.iconID, weatherIcon3)
+                    tempText3.text = forecast.temp
+                }
+
+                4 -> {
+                    dayText4.text = forecast.day
+                    setIcon(forecast.iconID, weatherIcon4)
+                    tempText4.text = forecast.temp
+                }
+            }
         }
     }
 
     private fun setIcon(iconID: String, iconView: ImageView) {
         when (iconID) {
-            "01d" -> iconView.setImageResource(R.drawable.ic_01d);
-            "01n" -> iconView.setImageResource(R.drawable.ic_01n);
-            "02d" -> iconView.setImageResource(R.drawable.ic_02d);
-            "02n" -> iconView.setImageResource(R.drawable.ic_02n);
-            "03d" -> iconView.setImageResource(R.drawable.ic_03d);
-            "03n" -> iconView.setImageResource(R.drawable.ic_03n);
-            "04d" -> iconView.setImageResource(R.drawable.ic_04d);
-            "04n" -> iconView.setImageResource(R.drawable.ic_04n);
-            "09d" -> iconView.setImageResource(R.drawable.ic_09d);
-            "09n" -> iconView.setImageResource(R.drawable.ic_09n);
-            "10d" -> iconView.setImageResource(R.drawable.ic_10d);
-            "10n" -> iconView.setImageResource(R.drawable.ic_10n);
-            "11d" -> iconView.setImageResource(R.drawable.ic_11d);
-            "11n" -> iconView.setImageResource(R.drawable.ic_11n);
-            "13d" -> iconView.setImageResource(R.drawable.ic_13d);
-            "13n" -> iconView.setImageResource(R.drawable.ic_13n);
-            "50d" -> iconView.setImageResource(R.drawable.ic_50d);
-            "50n" -> iconView.setImageResource(R.drawable.ic_50n);
+            "01d" -> iconView.setImageResource(R.drawable.ic_01d)
+            "01n" -> iconView.setImageResource(R.drawable.ic_01n)
+            "02d" -> iconView.setImageResource(R.drawable.ic_02d)
+            "02n" -> iconView.setImageResource(R.drawable.ic_02n)
+            "03d" -> iconView.setImageResource(R.drawable.ic_03d)
+            "03n" -> iconView.setImageResource(R.drawable.ic_03n)
+            "04d" -> iconView.setImageResource(R.drawable.ic_04d)
+            "04n" -> iconView.setImageResource(R.drawable.ic_04n)
+            "09d" -> iconView.setImageResource(R.drawable.ic_09d)
+            "09n" -> iconView.setImageResource(R.drawable.ic_09n)
+            "10d" -> iconView.setImageResource(R.drawable.ic_10d)
+            "10n" -> iconView.setImageResource(R.drawable.ic_10n)
+            "11d" -> iconView.setImageResource(R.drawable.ic_11d)
+            "11n" -> iconView.setImageResource(R.drawable.ic_11n)
+            "13d" -> iconView.setImageResource(R.drawable.ic_13d)
+            "13n" -> iconView.setImageResource(R.drawable.ic_13n)
+            "50d" -> iconView.setImageResource(R.drawable.ic_50d)
+            "50n" -> iconView.setImageResource(R.drawable.ic_50n)
         }
     }
 
@@ -124,7 +153,7 @@ class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
                 )
 
                 runOnUiThread {
-                    // UI THREAD
+                    inflateForecast()
                 }
 
             } catch (exception: Exception) {

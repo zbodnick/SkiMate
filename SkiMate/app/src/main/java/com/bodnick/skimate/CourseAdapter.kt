@@ -60,24 +60,24 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
 
         // Setting  weather dynamic weather icon
         when (currentCourse.weatherIcon) {
-            "01d" -> holder.weatherIcon.setImageResource(R.drawable.ic_01d);
-            "01n" -> holder.weatherIcon.setImageResource(R.drawable.ic_01n);
-            "02d" -> holder.weatherIcon.setImageResource(R.drawable.ic_02d);
-            "02n" -> holder.weatherIcon.setImageResource(R.drawable.ic_02n);
-            "03d" -> holder.weatherIcon.setImageResource(R.drawable.ic_03d);
-            "03n" -> holder.weatherIcon.setImageResource(R.drawable.ic_03n);
-            "04d" -> holder.weatherIcon.setImageResource(R.drawable.ic_04d);
-            "04n" -> holder.weatherIcon.setImageResource(R.drawable.ic_04n);
-            "09d" -> holder.weatherIcon.setImageResource(R.drawable.ic_09d);
-            "09n" -> holder.weatherIcon.setImageResource(R.drawable.ic_09n);
-            "10d" -> holder.weatherIcon.setImageResource(R.drawable.ic_10d);
-            "10n" -> holder.weatherIcon.setImageResource(R.drawable.ic_10n);
-            "11d" -> holder.weatherIcon.setImageResource(R.drawable.ic_11d);
-            "11n" -> holder.weatherIcon.setImageResource(R.drawable.ic_11n);
-            "13d" -> holder.weatherIcon.setImageResource(R.drawable.ic_13d);
-            "13n" -> holder.weatherIcon.setImageResource(R.drawable.ic_13n);
-            "50d" -> holder.weatherIcon.setImageResource(R.drawable.ic_50d);
-            "50n" -> holder.weatherIcon.setImageResource(R.drawable.ic_50n);
+            "01d" -> holder.weatherIcon.setImageResource(R.drawable.ic_01d)
+            "01n" -> holder.weatherIcon.setImageResource(R.drawable.ic_01n)
+            "02d" -> holder.weatherIcon.setImageResource(R.drawable.ic_02d)
+            "02n" -> holder.weatherIcon.setImageResource(R.drawable.ic_02n)
+            "03d" -> holder.weatherIcon.setImageResource(R.drawable.ic_03d)
+            "03n" -> holder.weatherIcon.setImageResource(R.drawable.ic_03n)
+            "04d" -> holder.weatherIcon.setImageResource(R.drawable.ic_04d)
+            "04n" -> holder.weatherIcon.setImageResource(R.drawable.ic_04n)
+            "09d" -> holder.weatherIcon.setImageResource(R.drawable.ic_09d)
+            "09n" -> holder.weatherIcon.setImageResource(R.drawable.ic_09n)
+            "10d" -> holder.weatherIcon.setImageResource(R.drawable.ic_10d)
+            "10n" -> holder.weatherIcon.setImageResource(R.drawable.ic_10n)
+            "11d" -> holder.weatherIcon.setImageResource(R.drawable.ic_11d)
+            "11n" -> holder.weatherIcon.setImageResource(R.drawable.ic_11n)
+            "13d" -> holder.weatherIcon.setImageResource(R.drawable.ic_13d)
+            "13n" -> holder.weatherIcon.setImageResource(R.drawable.ic_13n)
+            "50d" -> holder.weatherIcon.setImageResource(R.drawable.ic_50d)
+            "50n" -> holder.weatherIcon.setImageResource(R.drawable.ic_50n)
         }
 
         // Handle course menu listener - edit and delete
