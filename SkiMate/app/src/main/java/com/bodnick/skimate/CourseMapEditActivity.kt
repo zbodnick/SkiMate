@@ -146,7 +146,6 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                         .position(latLng, 26f)
                 )
 
-
                 course_lat = latLng.latitude.toString()
                 course_lng = latLng.longitude.toString()
 

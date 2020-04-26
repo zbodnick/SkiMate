@@ -45,6 +45,7 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
             intent.putExtra("lat", courses[position].lat)
             intent.putExtra("lng", courses[position].lng)
             intent.putExtra("name", courses[position].name)
+            intent.putExtra("bearing", courses[position].bearing)
 
             context.startActivity(intent)
 

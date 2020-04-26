@@ -1,14 +1,20 @@
 package com.bodnick.skimate
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.GroundOverlayOptions
 import com.google.android.gms.maps.model.LatLng
 import org.jetbrains.anko.doAsync
 
@@ -19,6 +25,7 @@ class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
     var lat: String = ""
     var lng: String = ""
     var name: String = ""
+    var bearing: Float = 0.0f
 
     private lateinit var dayText0: TextView
     private lateinit var dayText1: TextView
@@ -46,6 +53,7 @@ class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
         lat = intent.getStringExtra("lat").toString()
         lng = intent.getStringExtra("lng").toString()
         name = intent.getStringExtra("name").toString()
+        bearing = intent.getStringExtra("bearing").toString().toFloat()
 
         dayText0 = findViewById(R.id.daytext)
         dayText1 = findViewById(R.id.daytext1)
@@ -177,5 +185,32 @@ class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val zoomLevel = 18.0f
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(course, zoomLevel))
+
+        mMap.addGroundOverlay(
+            GroundOverlayOptions()
+                .image(
+                    BitmapDescriptorFactory.fromBitmap(
+                        R.drawable.ic_course_overlay_proper_scale.toBitmap(
+                            this
+                        )
+                    )
+                )
+                .position(course, 26.0f)
+                .bearing(bearing)
+        )
+    }
+
+    private fun Int.toBitmap(context: Context): Bitmap? {
+
+        // Retrieve vector asset drawable
+        val drawableAsset = ContextCompat.getDrawable(context, this) ?: return null
+        drawableAsset.setBounds(0, 0, drawableAsset.intrinsicWidth, drawableAsset.intrinsicHeight)
+        val bitmap = Bitmap.createBitmap(drawableAsset.intrinsicWidth, drawableAsset.intrinsicHeight, Bitmap.Config.ARGB_8888)
+
+        // Draw asset to bitmap
+        val canvas = Canvas(bitmap)
+        drawableAsset.draw(canvas)
+
+        return bitmap
     }
 }
