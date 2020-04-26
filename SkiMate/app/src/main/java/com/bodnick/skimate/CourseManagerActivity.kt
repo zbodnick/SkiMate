@@ -1,8 +1,8 @@
 package com.bodnick.skimate
 
 import android.content.Intent
+import android.database.DataSetObserver
 import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -13,7 +13,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -28,9 +27,9 @@ class CourseManagerActivity : AppCompatActivity() {
 
     private lateinit var adapter: CourseAdapter
 
-    private lateinit var addCourseButton: FloatingActionButton
+    private lateinit var addCourseButton: Button
 
-    private lateinit var updatedCourses: List<Course>
+    private lateinit var updatedCourses: MutableList<Course>
 
     private var geocodedLocation: Location = Location("", "", "")
 
@@ -55,7 +54,6 @@ class CourseManagerActivity : AppCompatActivity() {
         // Set the RecyclerView direction to vertical (the default)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-
         reference.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(databaseError: DatabaseError) {
                 Toast.makeText(
@@ -78,6 +76,7 @@ class CourseManagerActivity : AppCompatActivity() {
                 updateCourses(courses)
                 adapter.notifyDataSetChanged()
             }
+
         })
 
         addCourseButton.setOnClickListener {
@@ -194,7 +193,7 @@ class CourseManagerActivity : AppCompatActivity() {
 
     }
 
-    private fun updateCourses(courses: List<Course>) {
+    private fun updateCourses(courses: MutableList<Course>) {
         doAsync {
             val weatherManager = OpenWeatherManager()
 
@@ -205,7 +204,7 @@ class CourseManagerActivity : AppCompatActivity() {
                 updatedCourses = weatherManager.retrieveWeatherData (
                     apiKey = apiKey,
                     courses = courses
-                )
+                ) as MutableList<Course>
 
                 runOnUiThread {
                     adapter = CourseAdapter(updatedCourses, this@CourseManagerActivity, this@CourseManagerActivity)

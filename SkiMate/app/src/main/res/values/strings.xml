@@ -17,21 +17,31 @@
     <string name="course_placement_instructions"> Long Press to Place Slalom Course</string>
 
     <string name="new_course_title">New Course</string>
-
+    <string name="my_courses_title">My Courses</string>
     <!--Error Strings-->
     <string-array name="errors_array">
         <item>Error: please input a valid address</item>
 
     </string-array>
 
-<!--    API Strings-->
+    <!--    API Strings-->
     <string name="openWeatherAPI">ccd0e2c49b12698e5c8b1ccf07dd6f5a</string>
     <string name="google_maps_key">AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA</string>
 
-<!--    Dialog Strings-->
+    <!--    Dialog Strings-->
     <string name="name_tag">Name</string>
     <string name="address">Address</string>
     <string name="add">Add</string>
     <string name="cancel">Cancel</string>
+
+    <string name="delete_course">Delete Course</string>
+    <string name="edit_course">Edit Course</string>
+
+    <string name="tempDay">MON</string>
+    <string name="tempSpeed">24 MPH</string>
+    <string name="mphTitle">MPH</string>
+    <string name="tempDirection">South-Southeast</string>
+    <string name="tempTemp">76ºF</string>
+
 
 </resources>
