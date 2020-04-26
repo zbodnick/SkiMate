@@ -9,14 +9,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.GroundOverlayOptions
 import com.google.android.gms.maps.model.LatLng
 import org.jetbrains.anko.doAsync
+import kotlin.math.floor
 
 class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -26,6 +24,12 @@ class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
     var lng: String = ""
     var name: String = ""
     var bearing: Float = 0.0f
+    var windSpeed: String = ""
+    var windDegree: Float = 0.0f
+    var windDirection: String = ""
+
+    private lateinit var windDirectionText: TextView
+    private lateinit var windSpeedText: TextView
 
     private lateinit var dayText0: TextView
     private lateinit var dayText1: TextView
@@ -55,6 +59,16 @@ class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
         name = intent.getStringExtra("name").toString()
         bearing = intent.getStringExtra("bearing").toString().toFloat()
 
+        windSpeed = intent.getStringExtra("windSpeed").toString()
+        windDegree = intent.getStringExtra("windDegree").toString().toFloat()
+        windDirection = degreeToCompass(windDegree)
+
+        windDirectionText = findViewById(R.id.windDirectionText)
+        windSpeedText = findViewById(R.id.windSpeedText)
+
+        windDirectionText.text = windDirection
+        windSpeedText.text = "${windSpeed.substringBefore("mph")} MPH"
+
         dayText0 = findViewById(R.id.daytext)
         dayText1 = findViewById(R.id.daytext1)
         dayText2 = findViewById(R.id.daytext2)
@@ -75,8 +89,7 @@ class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
-        title = name;
-//        actionBar.setIcon(R.drawable.icon)
+        title = name
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -84,6 +97,12 @@ class CourseMapViewActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         getForecast()
+    }
+
+    private fun degreeToCompass(degree: Float): String {
+        var v = floor((degree / 22.5) + 0.5).toInt()
+        var directionArr = listOf("North", "North-Northeast", "Northeast", "East-Northeast", "East", "East-Southeast", "Southeast", "South-Southeast", "South", "South-Southwest", "Southwest", "West-Southwest", "West", "West-Northwest", "Northwest", "North-Northwest")
+        return directionArr[(v % 16)];
     }
 
     private fun inflateForecast() {

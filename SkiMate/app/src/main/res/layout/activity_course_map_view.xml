@@ -16,7 +16,86 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
+    <ImageView
+        android:id="@+id/windIconViewCard"
+        android:layout_width="41dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/wind_icon_top_view"
+        android:elevation="8dp"
+        map:layout_constraintBottom_toBottomOf="@+id/windReportCard"
+        map:layout_constraintEnd_toEndOf="parent"
+        map:layout_constraintHorizontal_bias="0.498"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="@+id/map"
+        map:layout_constraintVertical_bias="0.0"
+        map:srcCompat="@drawable/ic_wind_c" />
+
     <androidx.cardview.widget.CardView
+        android:id="@+id/windReportCard"
+        android:layout_width="250dp"
+        android:layout_height="111dp"
+        map:cardBackgroundColor="@color/colorPrimary"
+        map:cardCornerRadius="16dp"
+        map:layout_constraintBottom_toBottomOf="@+id/map"
+        map:layout_constraintEnd_toEndOf="@+id/map"
+        map:layout_constraintStart_toStartOf="parent"
+        map:layout_constraintTop_toTopOf="@+id/map"
+        map:layout_constraintVertical_bias="0.05">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="2dp" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="20dp">
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/windSpeedText"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="-15dp"
+                    android:text="@string/tempSpeed"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="50sp"
+                    android:textStyle="bold" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/windDirectionText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/tempDirection"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="28sp" />
+
+            </TableRow>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/fivedayforecastCard"
         android:layout_width="388dp"
         android:layout_height="140dp"
         map:cardBackgroundColor="@color/colorPrimary"
@@ -174,9 +253,9 @@
 
                     <View
                         android:layout_width="0.5dp"
-                        android:background="@android:color/white"
-                        android:layout_height="match_parent"/>
-                    
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white" />
+
                     <TableRow
                         android:layout_width="70dp"
                         android:layout_height="match_parent">
@@ -191,8 +270,8 @@
 
                     <View
                         android:layout_width="0.5dp"
-                        android:background="@android:color/white"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white" />
 
                     <TableRow
                         android:layout_width="70dp"
@@ -208,8 +287,8 @@
 
                     <View
                         android:layout_width="0.5dp"
-                        android:background="@android:color/white"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white" />
 
                     <TableRow
                         android:layout_width="70dp"
@@ -225,8 +304,8 @@
 
                     <View
                         android:layout_width="0.5dp"
-                        android:background="@android:color/white"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:background="@android:color/white" />
 
                     <TableRow
                         android:layout_width="70dp"

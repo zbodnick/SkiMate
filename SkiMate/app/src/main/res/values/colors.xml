@@ -4,6 +4,7 @@
     <color name="colorButton">#4CD964</color>
     <color name="colorPrimaryLight">#8000a5ff</color>
     <color name="colorPrimaryDarker">#90007AFF</color>
+    <color name="windReportLogoBackground">#007AFF</color>
     <color name="colorPrimaryDark">#0082FF</color>
     <color name="colorAccent">#81AFFB</color>
     <color name="mutedText">#dfeaff</color>

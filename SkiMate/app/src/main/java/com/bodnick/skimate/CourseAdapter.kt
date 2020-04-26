@@ -47,6 +47,9 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
             intent.putExtra("name", courses[position].name)
             intent.putExtra("bearing", courses[position].bearing)
 
+            intent.putExtra("windSpeed", courses[position].wind)
+            intent.putExtra("windDegree", courses[position].windDeg)
+
             context.startActivity(intent)
 
             activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)

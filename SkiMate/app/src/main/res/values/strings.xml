@@ -38,6 +38,9 @@
     <string name="edit_course">Edit Course</string>
 
     <string name="tempDay">MON</string>
+    <string name="tempSpeed">24 MPH</string>
+    <string name="mphTitle">MPH</string>
+    <string name="tempDirection">South-Southeast</string>
     <string name="tempTemp">76ºF</string>
 
 

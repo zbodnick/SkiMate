@@ -134,12 +134,14 @@ class OpenWeatherManager {
 
             val wind: JSONObject? = weatherJSON.getJSONObject("wind")
             var windSpeed: String? = wind?.optString("speed")
+            var windDegree: String? = wind?.optString("deg")
 
             temperature = temperature?.toDouble()?.roundToInt().toString()
             windSpeed = windSpeed?.toDouble()?.roundToInt().toString()
 
             it.temp = "${temperature}°F"
             it.wind = "${windSpeed}mph"
+            it.windDeg = windDegree
 //                it.precipitation = rainVolumePastHour
             it.weatherIcon = iconID
         }

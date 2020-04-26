@@ -93,7 +93,7 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
 
                     val id = genID()
-                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", bearing, id)
+                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", bearing, id, "")
                     reference.child(id).setValue(course)
 
                     val intent = Intent(this@CourseMapEditActivity, CourseManagerActivity::class.java)
