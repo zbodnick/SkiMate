@@ -85,15 +85,13 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                 val reference = fbDatabase.getReference("courses/")
                 val currentUser = FirebaseAuth.getInstance().currentUser
 
-                val bearing = courseOverlay.bearing.toString()
-
                 if (name.isNotEmpty() && location.isNotEmpty()) {
                     if  (editNameText.text.toString().isNotEmpty()) {
                         name = editNameText.text.toString()
                     }
 
                     val id = genID()
-                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", bearing, id, "")
+                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", "", courseOverlay.bearing.toString(), id)
                     reference.child(id).setValue(course)
 
                     val intent = Intent(this@CourseMapEditActivity, CourseManagerActivity::class.java)
