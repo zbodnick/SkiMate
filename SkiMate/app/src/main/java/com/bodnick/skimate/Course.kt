@@ -1,7 +1,6 @@
 package com.bodnick.skimate
 
 import java.io.Serializable
-import java.util.*
 
 data class Course (
     var name: String?,

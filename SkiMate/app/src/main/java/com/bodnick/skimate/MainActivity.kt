@@ -40,14 +40,14 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        if (firebaseAuth.currentUser != null) {
-            val user = firebaseAuth.currentUser
-            Toast.makeText(this, "Welcome back, ${user!!.email}",
-                Toast.LENGTH_SHORT).show()
-
-            val intent = Intent(this, CourseManagerActivity::class.java)
-            startActivity(intent)
-        }
+//        if (firebaseAuth.currentUser != null) {
+//            val user = firebaseAuth.currentUser
+//            Toast.makeText(this, "Welcome back, ${user!!.email}",
+//                Toast.LENGTH_SHORT).show()
+//
+//            val intent = Intent(this, CourseManagerActivity::class.java)
+//            startActivity(intent)
+//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

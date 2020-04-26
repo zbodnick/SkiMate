@@ -16,19 +16,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <ImageButton
-        android:id="@+id/undoButton"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/colorAccent"
-        map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent"
-        map:layout_constraintHorizontal_bias="0.954"
-        map:layout_constraintStart_toStartOf="parent"
-        map:layout_constraintTop_toTopOf="@+id/map"
-        map:layout_constraintVertical_bias="0.029"
-        map:srcCompat="@drawable/ic_replay_black_24dp" />
-
     <androidx.cardview.widget.CardView
         android:layout_width="388dp"
         android:layout_height="140dp"
@@ -178,7 +165,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/course_current_weather_icon"
+                            android:id="@+id/weathericon"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:contentDescription="@string/todo" />
@@ -195,7 +182,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/course_current_weather_icon1"
+                            android:id="@+id/weathericon1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:contentDescription="@string/todo" />
@@ -212,19 +199,7 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/course_current_weather_icon2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:contentDescription="@string/todo" />
-
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="70dp"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/course_current_weather_icon3"
+                            android:id="@+id/weathericon2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:contentDescription="@string/todo" />
@@ -241,7 +216,24 @@
                         android:layout_height="match_parent">
 
                         <ImageView
-                            android:id="@+id/course_current_weather_icon4"
+                            android:id="@+id/weathericon3"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:contentDescription="@string/todo" />
+
+                    </TableRow>
+
+                    <View
+                        android:layout_width="0.5dp"
+                        android:background="@android:color/darker_gray"
+                        android:layout_height="match_parent"/>
+
+                    <TableRow
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/weathericon4"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:contentDescription="@string/todo" />
@@ -328,7 +320,7 @@
                         android:layout_height="28dp">
 
                         <TextView
-                            android:id="@+id/temptext4"
+                            android:id="@+id/temptext3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="82"
@@ -347,7 +339,7 @@
                         android:layout_height="28dp">
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/temptext4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="90"
@@ -362,6 +354,5 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

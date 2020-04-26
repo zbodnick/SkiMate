@@ -2,6 +2,7 @@ package com.bodnick.skimate
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,15 +40,15 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
 
         holder.viewCourseButton.setOnClickListener {
             // Click listener for view course button
-//            val intent = Intent(context, CourseMapEditActivity::class.java)
-//
-//            intent.putExtra("lat", courses[position].lat)
-//            intent.putExtra("lng", courses[position].lng)
-//            intent.putExtra("name", courses[position].name)
-//
-//            context.startActivity(intent)
-//
-//            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            val intent = Intent(context, CourseMapViewActivity::class.java)
+
+            intent.putExtra("lat", courses[position].lat)
+            intent.putExtra("lng", courses[position].lng)
+            intent.putExtra("name", courses[position].name)
+
+            context.startActivity(intent)
+
+            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         val apiKey = "AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA"
