@@ -3,6 +3,8 @@
     <string name="password">password</string>
     <string name="confirm_password">confirm password</string>
 
+    <string name="remember_me">Remember Me</string>
+
     <string name="login">LOGIN</string>
     <string name="signup">New to Ski Mate? Sign up</string>
     <string name="signup_button">Sign up</string>

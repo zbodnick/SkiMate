@@ -10,10 +10,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -37,17 +34,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var login: Button
 
+    private lateinit var rememberMeSwitch: Switch
+
+    private var rememberMe: Boolean = false
+
     override fun onStart() {
         super.onStart()
-
-//        if (firebaseAuth.currentUser != null) {
-//            val user = firebaseAuth.currentUser
-//            Toast.makeText(this, "Welcome back, ${user!!.email}",
-//                Toast.LENGTH_SHORT).show()
-//
-//            val intent = Intent(this, CourseManagerActivity::class.java)
-//            startActivity(intent)
-//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,6 +54,11 @@ class MainActivity : AppCompatActivity() {
 
         // Tells Android which layout file should be used for this screen.
         setContentView(R.layout.activity_main)
+        rememberMeSwitch = findViewById(R.id.remember_me)
+
+        rememberMeSwitch.setOnClickListener {
+            rememberMe = rememberMeSwitch.isChecked
+        }
 
         // The IDs we are using here should match what was set in the "id" field in our XML layout
         // Note: findViewById only works here because we've already called setContentView above.
@@ -95,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                             .edit()
                             .putString("username", inputtedUsername)
                             .putString("password", inputtedPassword)
+                            .putBoolean("rememberMe", rememberMe)
                             .apply()
 
                         // An Intent is used to start a new Activity and also send data to it (via `putExtra(...)`)
@@ -121,6 +119,20 @@ class MainActivity : AppCompatActivity() {
 
         val savedUsername = preferences.getString("username", "")
         val savedPassword = preferences.getString("password", "")
+        val savedRememberMe = preferences.getBoolean("rememberMe", false)
+
+        rememberMeSwitch.isChecked = savedRememberMe
+
+        val user = firebaseAuth.currentUser
+        if (user != null && savedRememberMe) {
+            Toast.makeText(
+                this, "Welcome back, ${user!!.email}",
+                Toast.LENGTH_SHORT
+            ).show()
+
+            val intent = Intent(this, CourseManagerActivity::class.java)
+            startActivity(intent)
+        }
 
         // By calling setText now, *after* having called addTextChangedListener above, causes my TextWatcher
         // code to execute. This is useful because it runs the logic to enable / disable the Login button,

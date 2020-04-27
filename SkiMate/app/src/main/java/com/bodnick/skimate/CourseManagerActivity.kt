@@ -1,6 +1,7 @@
 package com.bodnick.skimate
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.DataSetObserver
 import android.location.Address
 import android.os.Bundle
