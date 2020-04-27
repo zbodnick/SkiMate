@@ -1,5 +1,5 @@
 # CSCI 4237 - Project 2 - SkiMate
-## The Slalom Water Skiers Course Management Solution.
+## The Slalom Water Skiers Course Management Solution
 
 ## Demo Credentials - registered account with pre-added courses
  - Username: zbodnick@gwu.edu
