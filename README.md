@@ -1,10 +1,21 @@
-# CSCI 4237 - Project 2 - BYOI
-Bring Your Own Idea!
+# CSCI 4237 - Project 2 - SkiMate
+## The slalom skiers course management solution.
 
-## Getting Started
-1. Clone this repo to your local machine.
-2. Create a new Android Studio project. During the initial project setup, set the `Save location` to the folder that was created when you cloned this repo (e.g. so you can commit your project back into this repo).
-3. Use git to add, commit, and push your new project to the `master` branch - now you have your start pointing set locally and on GitHub! You are now ready to get started.
-4. Don't forget to branch before you create commits - you'll need to create Pull Requests for the major project deliverables.
+## Demo Credentials
+The following account has pre-added course information.
+Username: zbodnick@gwu.edu
+Password: password123
 
-View the [Project Requirements Document](https://drive.google.com/open?id=1QwTZ72eqFFk39mgzo3tHHHJnMDSGxqGGQ9xZquUgdcw) for full details!
+## Instructions
+1. Signup and create an account
+2. Create a course
+  - Example Address: 3201 Tuxedo Ave, West Palm Beach, FL 33405
+    - This is my home ski course and the address will bring you straight to the lake
+3. Place the water ski course on the lake and rotate to your liking
+4. Click "Done"
+5. View courses in course manager, click side arrow button on course row to access the courses view page (5 day forecast, wind report)
+6. Click the 3 dots to access menu option - delete works but edit does not
+7. Enjoy!
+
+## Known Bugs
+1. When creating a new course, you may have to click "Add" twice in order for the Geocode result to appear in a dialog view
