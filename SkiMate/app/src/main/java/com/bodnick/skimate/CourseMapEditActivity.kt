@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.GroundOverlay
 import com.google.android.gms.maps.model.GroundOverlayOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
@@ -81,11 +82,12 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
 
         infoButton.setOnClickListener {
             if (coursePlaced) {
-
-                val reference = fbDatabase.getReference("courses/")
                 val currentUser = FirebaseAuth.getInstance().currentUser
+//                val email = currentUser?.email as String
+//
+//                val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
 
-                val bearing = courseOverlay.bearing.toString()
+                val reference = fbDatabase.getReference("${currentUser?.uid}/courses/")
 
                 if (name.isNotEmpty() && location.isNotEmpty()) {
                     if  (editNameText.text.toString().isNotEmpty()) {
@@ -93,7 +95,7 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
 
                     val id = genID()
-                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", bearing, id, "")
+                    val course = Course(name, location.substringAfter(","," "), course_lat, course_lng, "", "", "", "", "", courseOverlay.bearing.toString(), id)
                     reference.child(id).setValue(course)
 
                     val intent = Intent(this@CourseMapEditActivity, CourseManagerActivity::class.java)
@@ -131,7 +133,7 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
         val course = LatLng(lat.toDouble(), lng.toDouble())
 
         mMap.setOnMapLongClickListener { latLng: LatLng ->
-            Log.d("CourseMapActivity", "Course placed at ${latLng.latitude}, ${latLng.longitude}")
+//            Log.d("CourseMapActivity", "Course placed at ${latLng.latitude}, ${latLng.longitude}")
 
             if ( !undoButton.isEnabled ) {
                 courseOverlay = mMap.addGroundOverlay(

@@ -1,6 +1,7 @@
 package com.bodnick.skimate
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.DataSetObserver
 import android.location.Address
 import android.os.Bundle
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -35,13 +37,20 @@ class CourseManagerActivity : AppCompatActivity() {
 
     private var courseAddress: Address? = null
 
+    private var searchResults: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_manager)
 
         // Initialize db
         fbDatabase = FirebaseDatabase.getInstance()
-        val reference = fbDatabase.getReference("courses/")
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val email = currentUser?.email as String
+        val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
+
+
+        val reference = fbDatabase.getReference("${currentUser?.uid}/courses/")
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
@@ -50,6 +59,8 @@ class CourseManagerActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
 
         addCourseButton = findViewById(R.id.add_course_button)
+
+        searchResults = getString(R.string.searchResults)
 
         // Set the RecyclerView direction to vertical (the default)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -101,14 +112,13 @@ class CourseManagerActivity : AppCompatActivity() {
                     getGeocode(address?.text.toString())
                 } else {
 
-                val arrayAdapter =
+                    val arrayAdapter =
                     ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice)
                 arrayAdapter.add(geocodedLocation.address)
 
                 if (geocodedLocation.address.isNotEmpty()) {
-
                     android.app.AlertDialog.Builder(this)
-                        .setTitle("Search Results")
+                        .setTitle(searchResults)
                         .setAdapter(arrayAdapter) { dialog, which ->
 
                             val intent = Intent(this@CourseManagerActivity, CourseMapEditActivity::class.java)
@@ -120,13 +130,13 @@ class CourseManagerActivity : AppCompatActivity() {
 
                             this.startActivity(intent)
                             this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                            Toast.makeText(
-                                this,
-                                "Locating course at ${geocodedLocation.lat} | ${geocodedLocation.lng}...",
-                                Toast.LENGTH_SHORT
-                            ).show()
+//                            Toast.makeText(
+//                                this,
+//                                "Locating course at ${geocodedLocation.lat} | ${geocodedLocation.lng}...",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
                         }
-                        .setNegativeButton("CANCEL") { dialog, which ->
+                        .setNegativeButton(getString(R.string.cancelUppercase)) { dialog, which ->
                             dialog.dismiss()
                         }
                         .show()

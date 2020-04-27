@@ -55,7 +55,7 @@ class GoogleGeocodeManager {
                 val lat = locationInfo.optString("lat")
                 val lng = locationInfo.optString("lng")
 
-                println("Address: $address \nLat: $lat \nLng: $lng ")
+//                println("Address: $address \nLat: $lat \nLng: $lng ")
 
                 return Location(address, lat, lng)
 

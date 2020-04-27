@@ -16,34 +16,15 @@ import android.view.Window
 import android.widget.*
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.*
+import com.google.firebase.database.FirebaseDatabase
 import java.lang.Exception
+import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
 
-    /*
-
-    We use `lateinit var` for our UI variables because they cannot be initialized until
-    setContentView(...) is called in onCreate(...) below.
-
-    For example, this line would cause a crash:
-        private val username: EditText = findViewById(R.id.username)
-
-    Alternatively, could also use a nullable variable, but it'd be inconvenient to do a null-check on each usage:
-        private var username: EditText? = null
-
-    So `lateinit var` acts as a "promise" to the compiler that we cannot initialize the variable right now,
-    but we will later *and* when we do it'll be non-null.
-
-    If you forget to initialize a `lateinit` and then try and use it, the app will crash.
-
-    */
-
     private lateinit var firebaseAuth: FirebaseAuth
-
-//    private lateinit var fname: EditText
-//    private lateinit var lname: EditText
-//    private lateinit var username: EditText
     private lateinit var password: EditText
+    private lateinit var confirmPassword: EditText
     private lateinit var email: EditText
 
     private lateinit var signup: Button
@@ -53,15 +34,11 @@ class RegisterActivity : AppCompatActivity() {
 
         firebaseAuth = FirebaseAuth.getInstance()
 
-        // Tells Android which layout file should be used for this screen.
         setContentView(R.layout.activity_register)
 
-        // The IDs we are using here should match what was set in the "id" field in our XML layout
-        // Note: findViewById only works here because we've already called setContentView above.
-//        username = findViewById(R.id.username)
         password = findViewById(R.id.signup_password)
-//        fname = findViewById(R.id.password)
-//        lname = findViewById(R.id.password)
+        confirmPassword = findViewById(R.id.signup_password_confirm)
+
         email = findViewById(R.id.signup_username)
         signup = findViewById(R.id.signup)
 
@@ -69,33 +46,47 @@ class RegisterActivity : AppCompatActivity() {
             // Save user credentials to file
             val inputtedUsername: String = email.text.toString()
             val inputtedPassword: String = password.text.toString()
+            val inputtedConfirmPassword: String = confirmPassword.text.toString()
 
-            firebaseAuth
-                .createUserWithEmailAndPassword(inputtedUsername, inputtedPassword)
+            if (inputtedPassword == inputtedConfirmPassword) {
 
-                .addOnCompleteListener { task: Task<AuthResult> ->
-                    if (task.isSuccessful) {
-                        val currentUser: FirebaseUser = firebaseAuth.currentUser!!
-                        val email = currentUser.email
+                firebaseAuth
+                    .createUserWithEmailAndPassword(inputtedUsername, inputtedPassword)
 
-                        Toast.makeText(
-                            this,
-                            "Welcome to Ski Mate!",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                    .addOnCompleteListener { task: Task<AuthResult> ->
+                        if (task.isSuccessful) {
+                            val currentUser: FirebaseUser = firebaseAuth.currentUser!!
+                            val email = currentUser.email
 
-                        val intent = Intent(this@RegisterActivity, CourseManagerActivity::class.java)
-                        startActivity(intent)
-                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                    } else {
-                        val exception = task.exception!!
-                        Toast.makeText(
-                            this,
-                            "Failed to register: $exception!",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            Toast.makeText(
+                                this,
+                                "Welcome to Ski Mate!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            val intent =
+                                Intent(this@RegisterActivity, CourseManagerActivity::class.java)
+                            startActivity(intent)
+                            overridePendingTransition(
+                                android.R.anim.fade_in,
+                                android.R.anim.fade_out
+                            )
+                        } else {
+                            val exception = task.exception!!
+                            Toast.makeText(
+                                this,
+                                "Failed to register: $exception!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
-                }
+            } else {
+                Toast.makeText(
+                    this,
+                    "Passwords must be the same, try again.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
 
         // Kotlin shorthand for login.setEnabled(false).
@@ -105,6 +96,10 @@ class RegisterActivity : AppCompatActivity() {
         email.addTextChangedListener(textWatcher)
         password.addTextChangedListener(textWatcher)
 
+    }
+
+    fun genID(): String {
+        return UUID.randomUUID().toString()
     }
 
     // Another example of explicitly implementing an interface (TextWatcher). We cannot use
