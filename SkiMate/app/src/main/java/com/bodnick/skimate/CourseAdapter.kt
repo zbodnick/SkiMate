@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -32,7 +33,6 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
         holder.name.text = currentCourse.name
         holder.location.text = currentCourse.location
         holder.temp.text = currentCourse.temp
-        holder.precipitation.text = currentCourse.precipitation
         holder.wind.text = currentCourse.wind
 
         val lat = currentCourse.lat
@@ -117,7 +117,10 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
     }
 
     private fun deleteCourse(course: Course) {
-        val dbReference = FirebaseDatabase.getInstance().getReference("courses/")
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val email = currentUser?.email as String
+        val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
+        val dbReference = FirebaseDatabase.getInstance().getReference("$filteredEmail/courses/")
 
         dbReference.child(course.id).removeValue()
 
@@ -139,7 +142,6 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
 
         val location: TextView = itemView.findViewById(R.id.course_location)
         val temp: TextView = itemView.findViewById(R.id.course_temperature)
-        val precipitation: TextView = itemView.findViewById(R.id.course_rain_percent)
         val wind: TextView = itemView.findViewById(R.id.course_wind_speed)
         val name: TextView = itemView.findViewById(R.id.course_name)
 

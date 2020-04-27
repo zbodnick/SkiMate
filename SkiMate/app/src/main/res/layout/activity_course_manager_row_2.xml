@@ -146,29 +146,6 @@
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/course_raindrop_icon"
-                    android:layout_width="26dp"
-                    android:layout_height="25dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="14dp"
-                    android:layout_marginEnd="6dp"
-                    android:contentDescription="@string/todo"
-                    android:padding="4dp"
-                    app:srcCompat="@drawable/ic_raindrop_c" />
-
-                <TextView
-                    android:id="@+id/course_rain_percent"
-                    android:layout_width="30dp"
-                    android:layout_height="25dp"
-                    android:layout_marginLeft="-3dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginRight="22dp"
-                    android:gravity="center_vertical"
-                    android:text="32%"
-                    android:textColor="@android:color/white"
-                    android:textSize="15sp" />
-
-                <ImageView
                     android:id="@+id/course_wind_icon"
                     android:layout_width="26dp"
                     android:layout_height="25dp"

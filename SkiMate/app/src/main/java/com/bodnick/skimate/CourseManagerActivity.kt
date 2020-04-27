@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -41,7 +42,10 @@ class CourseManagerActivity : AppCompatActivity() {
 
         // Initialize db
         fbDatabase = FirebaseDatabase.getInstance()
-        val reference = fbDatabase.getReference("courses/")
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val email = currentUser?.email as String
+        val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
+        val reference = fbDatabase.getReference("$filteredEmail/courses/")
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 

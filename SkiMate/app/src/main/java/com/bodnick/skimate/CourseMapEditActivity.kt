@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.GroundOverlay
 import com.google.android.gms.maps.model.GroundOverlayOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import java.util.*
 
@@ -81,9 +82,12 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
 
         infoButton.setOnClickListener {
             if (coursePlaced) {
-
-                val reference = fbDatabase.getReference("courses/")
                 val currentUser = FirebaseAuth.getInstance().currentUser
+                val email = currentUser?.email as String
+
+                val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
+
+                val reference = fbDatabase.getReference("$filteredEmail/courses/")
 
                 if (name.isNotEmpty() && location.isNotEmpty()) {
                     if  (editNameText.text.toString().isNotEmpty()) {
