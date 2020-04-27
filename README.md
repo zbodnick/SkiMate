@@ -1,8 +1,7 @@
 # CSCI 4237 - Project 2 - SkiMate
 ## The slalom skiers course management solution.
 
-## Demo Credentials
-The following account has pre-added course information.
+## Demo Credentials - registered account with pre-added courses
  - Username: zbodnick@gwu.edu
  - Password: password123
 
