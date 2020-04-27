@@ -1,8 +1,9 @@
 package com.bodnick.skimate
 
 import android.content.Intent
+import android.content.SharedPreferences
+import android.database.DataSetObserver
 import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -13,25 +14,43 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import org.jetbrains.anko.doAsync
 
 class CourseManagerActivity : AppCompatActivity() {
+
+    private lateinit var fbDatabase: FirebaseDatabase
 
     private lateinit var recyclerView: RecyclerView
 
     private lateinit var adapter: CourseAdapter
 
-    private lateinit var addCourseButton: FloatingActionButton
+    private lateinit var addCourseButton: Button
 
-    private lateinit var updatedCourses: List<Course>
+    private lateinit var updatedCourses: MutableList<Course>
 
-    private var newCourseName: String = ""
-    private var newCourseAddressList: List<Address> = listOf()
+    private var geocodedLocation: Location = Location("", "", "")
+
+    private var courseAddress: Address? = null
+
+    private var searchResults: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_course_manager)
+
+        // Initialize db
+        fbDatabase = FirebaseDatabase.getInstance()
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val email = currentUser?.email as String
+        val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
+
+
+        val reference = fbDatabase.getReference("${currentUser?.uid}/courses/")
 
         overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
@@ -41,16 +60,35 @@ class CourseManagerActivity : AppCompatActivity() {
 
         addCourseButton = findViewById(R.id.add_course_button)
 
+        searchResults = getString(R.string.searchResults)
+
         // Set the RecyclerView direction to vertical (the default)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val courses = getCourses()
+        reference.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(databaseError: DatabaseError) {
+                Toast.makeText(
+                    this@CourseManagerActivity,
+                    "Failed to retrieve Courses Error: ${databaseError.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
 
-        adapter = CourseAdapter(courses, this, this)
-        recyclerView.adapter = adapter
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val courses = mutableListOf<Course>()
+                dataSnapshot.children.forEach { data ->
+                    val course = data.getValue(Course::class.java)
+                    if (course != null) {
+                        courses.add(course)
+                    }
+                }
+                adapter = CourseAdapter(courses, this@CourseManagerActivity, this@CourseManagerActivity)
+                recyclerView.adapter = adapter
+                updateCourses(courses)
+                adapter.notifyDataSetChanged()
+            }
 
-        updateCourses(courses)
-        adapter.notifyDataSetChanged()
+        })
 
         addCourseButton.setOnClickListener {
 
@@ -68,46 +106,45 @@ class CourseManagerActivity : AppCompatActivity() {
             dialog.findViewById<Button>(R.id.cancelButton)?.setText(R.string.cancel)
 
             addButton?.setOnClickListener(View.OnClickListener {
+                getGeocode(address?.text.toString())
+                if (geocodedLocation.address.isEmpty() || geocodedLocation.lat.isEmpty() || geocodedLocation.lng.isEmpty()) {
+                    // Geocode inputted address
+                    getGeocode(address?.text.toString())
+                } else {
 
-                // Geocode inputted address
-                getGeocode(name?.text.toString())
-
-                val destinations = convertAddressList(newCourseAddressList)
-                val arrayAdapter =
+                    val arrayAdapter =
                     ArrayAdapter<String>(this, android.R.layout.select_dialog_singlechoice)
-                arrayAdapter.addAll(destinations)
+                arrayAdapter.add(geocodedLocation.address)
 
-                if (destinations.isNotEmpty()) {
-
+                if (geocodedLocation.address.isNotEmpty()) {
                     android.app.AlertDialog.Builder(this)
-                        .setTitle("Search Results")
+                        .setTitle(searchResults)
                         .setAdapter(arrayAdapter) { dialog, which ->
 
                             val intent = Intent(this@CourseManagerActivity, CourseMapEditActivity::class.java)
 
-                            val lat = newCourseAddressList[which].latitude.toString()
-                            val lng = newCourseAddressList[which].longitude.toString()
-
                             intent.putExtra("name", name?.text.toString())
-                            intent.putExtra("lat", lat)
-                            intent.putExtra("lng", lng)
+                            intent.putExtra("address", geocodedLocation.address)
+                            intent.putExtra("lat", geocodedLocation.lat)
+                            intent.putExtra("lng", geocodedLocation.lng)
 
                             this.startActivity(intent)
                             this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                            Toast.makeText(
-                                this,
-                                "Locating course at ${destinations[which]}...",
-                                Toast.LENGTH_SHORT
-                            ).show()
+//                            Toast.makeText(
+//                                this,
+//                                "Locating course at ${geocodedLocation.lat} | ${geocodedLocation.lng}...",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
                         }
-                        .setNegativeButton("CANCEL") { dialog, which ->
+                        .setNegativeButton(getString(R.string.cancelUppercase)) { dialog, which ->
                             dialog.dismiss()
                         }
                         .show()
                 } else {
                     throwError(0)
-                    Toast.makeText(this, "${name?.text.toString()}", Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(this, "${name?.text.toString()}", Toast.LENGTH_SHORT).show()
 
+                }
                 }
             })
 
@@ -126,32 +163,29 @@ class CourseManagerActivity : AppCompatActivity() {
     private fun getGeocode(address: String) {
 
         doAsync {
-            val geocoder = Geocoder(this@CourseManagerActivity)
-            newCourseAddressList = try {
+            val geocodeManager = GoogleGeocodeManager()
 
-                geocoder.getFromLocationName(address, 5)
+            try {
+                val apiKey = "AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA"
+
+                geocodedLocation = geocodeManager.geocode (
+                    apiKey = apiKey,
+                    address = address
+                )
 
             } catch (exception: Exception) {
-                Toast.makeText(this@CourseManagerActivity, "${exception.printStackTrace()}", Toast.LENGTH_SHORT).show()
-
-                listOf<Address>()
+                exception.printStackTrace()
+                // Switch back to the UI Thread
+                runOnUiThread {
+                    Toast.makeText(
+                        this@CourseManagerActivity,
+                        "Error: Cannot retrieve data from Google Geocode API: $exception",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
-    }
 
-    private fun convertAddressList(addressList: List<Address>): MutableList<String> {
-
-        val convertedList: MutableList<String> = arrayListOf()
-
-        addressList.forEachIndexed { index, element ->
-
-            val address: String = addressList[index].getAddressLine(index)
-//            Toast.makeText(this, "${address}", Toast.LENGTH_SHORT).show()
-
-            convertedList.add(address)
-        }
-
-        return convertedList
     }
 
     private fun createCourseDialog(): AlertDialog {
@@ -169,7 +203,7 @@ class CourseManagerActivity : AppCompatActivity() {
 
     }
 
-    private fun updateCourses(courses: List<Course>) {
+    private fun updateCourses(courses: MutableList<Course>) {
         doAsync {
             val weatherManager = OpenWeatherManager()
 
@@ -180,7 +214,7 @@ class CourseManagerActivity : AppCompatActivity() {
                 updatedCourses = weatherManager.retrieveWeatherData (
                     apiKey = apiKey,
                     courses = courses
-                )
+                ) as MutableList<Course>
 
                 runOnUiThread {
                     adapter = CourseAdapter(updatedCourses, this@CourseManagerActivity, this@CourseManagerActivity)
@@ -199,40 +233,5 @@ class CourseManagerActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun getCourses(): List<Course> {
-        return listOf(
-            Course (
-                name = "PB Water Sports",
-                location = "Stub Canal",
-                lat = "26.682656",
-                lng = "-80.071766",
-                weatherIcon = " ",
-                temp = "77°F",
-                precipitation = "32%",
-                wind = "10mph"
-            ),
-            Course (
-                name = "PB Training Center",
-                location = "Lake 38",
-                lat = "26.382224",
-                lng = "-80.223308",
-                weatherIcon = " ",
-                temp = "84°F",
-                precipitation = "0%",
-                wind = "6mph"
-            ),
-            Course (
-                name = "Camp Ramah",
-                location = "Skeleton Lake",
-                lat = "45.226577",
-                lng = "-79.497161",
-                weatherIcon = " ",
-                temp = "54°F",
-                precipitation = "8%",
-                wind = "12mph"
-            )
-        )
     }
 }

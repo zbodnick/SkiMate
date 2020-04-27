@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#00a5ff</color>
+    <color name="colorButton">#4CD964</color>
+    <color name="colorPrimaryLight">#8000a5ff</color>
+    <color name="colorPrimaryDarker">#90007AFF</color>
+    <color name="windReportLogoBackground">#007AFF</color>
     <color name="colorPrimaryDark">#0082FF</color>
     <color name="colorAccent">#81AFFB</color>
     <color name="mutedText">#dfeaff</color>
@@ -11,4 +15,6 @@
     <color name="darkerGrey">#121212</color>
     <color name="iconBackgroundGrey">#d7d7d7</color>
     <color name="dialog_button">#F4F6F8</color>
+
+    <color name="transparentGrey">#60aaaaaa</color>
 </resources>
