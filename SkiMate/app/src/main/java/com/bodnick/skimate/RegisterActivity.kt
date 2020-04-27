@@ -59,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val currentUser: FirebaseUser = firebaseAuth.currentUser!!
                             val email = currentUser.email
-                            addDefaultCourse()
+//                            addDefaultCourse()
 
                             Toast.makeText(
                                 this,
@@ -103,9 +103,9 @@ class RegisterActivity : AppCompatActivity() {
 
     fun addDefaultCourse() {
         val currentUser = FirebaseAuth.getInstance().currentUser
-        val email = currentUser?.email as String
-        val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
-        val reference = fbDatabase.getReference("$filteredEmail/courses/")
+//        val email = currentUser?.email as String
+//        val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
+        val reference = fbDatabase.getReference("${currentUser?.uid}/courses/")
 
         val id = genID()
             val course = Course(

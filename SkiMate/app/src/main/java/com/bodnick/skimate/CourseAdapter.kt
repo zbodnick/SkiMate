@@ -119,16 +119,17 @@ class CourseAdapter(val courses: MutableList<Course>, val context: Context, val 
     private fun deleteCourse(course: Course) {
         val currentUser = FirebaseAuth.getInstance().currentUser
         val email = currentUser?.email as String
-        val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
-        val dbReference = FirebaseDatabase.getInstance().getReference("$filteredEmail/courses/")
+
+//        val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
+        val dbReference = FirebaseDatabase.getInstance().getReference("${currentUser?.uid}/courses/")
 
         dbReference.child(course.id).removeValue()
 
-        Toast.makeText(
-            context,
-            "Removing course with ID: ${course.id}",
-            Toast.LENGTH_SHORT
-        ).show()
+//        Toast.makeText(
+//            context,
+//            "Removing course with ID: ${course.id}",
+//            Toast.LENGTH_SHORT
+//        ).show()
 
     }
 

@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
         // Using a lambda to implement a View.OnClickListener interface. We can do this because
         // an OnClickListener is an interface that only requires *one* function.
         login.setOnClickListener { view: View ->
-            Log.d("MainActivity", "onClick() called")
+//            Log.d("MainActivity", "onClick() called")
 
             // Save user credentials to file
             val inputtedUsername: String = username.text.toString()
@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
         val user = firebaseAuth.currentUser
         if (user != null && savedRememberMe) {
             Toast.makeText(
-                this, "Welcome back, ${user!!.email}",
+                this, "${getString(R.string.welcomeBack)}, ${user!!.email}",
                 Toast.LENGTH_SHORT
             ).show()
 

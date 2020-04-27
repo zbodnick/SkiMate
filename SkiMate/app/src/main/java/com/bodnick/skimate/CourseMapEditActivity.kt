@@ -83,11 +83,11 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
         infoButton.setOnClickListener {
             if (coursePlaced) {
                 val currentUser = FirebaseAuth.getInstance().currentUser
-                val email = currentUser?.email as String
+//                val email = currentUser?.email as String
+//
+//                val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
 
-                val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
-
-                val reference = fbDatabase.getReference("$filteredEmail/courses/")
+                val reference = fbDatabase.getReference("${currentUser?.uid}/courses/")
 
                 if (name.isNotEmpty() && location.isNotEmpty()) {
                     if  (editNameText.text.toString().isNotEmpty()) {
@@ -133,7 +133,7 @@ class CourseMapEditActivity : AppCompatActivity(), OnMapReadyCallback {
         val course = LatLng(lat.toDouble(), lng.toDouble())
 
         mMap.setOnMapLongClickListener { latLng: LatLng ->
-            Log.d("CourseMapActivity", "Course placed at ${latLng.latitude}, ${latLng.longitude}")
+//            Log.d("CourseMapActivity", "Course placed at ${latLng.latitude}, ${latLng.longitude}")
 
             if ( !undoButton.isEnabled ) {
                 courseOverlay = mMap.addGroundOverlay(
