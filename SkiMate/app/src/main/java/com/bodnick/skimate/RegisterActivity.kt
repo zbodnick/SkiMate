@@ -27,8 +27,6 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var confirmPassword: EditText
     private lateinit var email: EditText
 
-    private lateinit var fbDatabase: FirebaseDatabase
-
     private lateinit var signup: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +57,6 @@ class RegisterActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             val currentUser: FirebaseUser = firebaseAuth.currentUser!!
                             val email = currentUser.email
-//                            addDefaultCourse()
 
                             Toast.makeText(
                                 this,
@@ -99,29 +96,6 @@ class RegisterActivity : AppCompatActivity() {
         email.addTextChangedListener(textWatcher)
         password.addTextChangedListener(textWatcher)
 
-    }
-
-    fun addDefaultCourse() {
-        val currentUser = FirebaseAuth.getInstance().currentUser
-//        val email = currentUser?.email as String
-//        val filteredEmail = email.filter{ it.isLetterOrDigit() || it.isWhitespace() }
-        val reference = fbDatabase.getReference("${currentUser?.uid}/courses/")
-
-        val id = genID()
-            val course = Course(
-                "Your Slalom Course",
-                " West Palm Beach, FL 33405, USA",
-                "26.681755201359202",
-                "-80.07176410406828",
-                "",
-                "",
-                "",
-                "",
-                "",
-                "0.0",
-                id
-            )
-            reference.child(id).setValue(course)
     }
 
     fun genID(): String {

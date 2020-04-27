@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SkiMate</string>
+    <string name="password">contraseña</string>
+    <string name="confirm_password">confirmar contraseña </string>
+
+    <string name="remember_me">Recuérdame</string>
+
+    <string name="login">USUARIO</string>
+    <string name="signup">Cliente Nuevo? Empieza Aquí</string>
+    <string name="signup_button">Regístrese</string>
+    <string name="have_account">Ya tiene cuenta? Identificarse</string>
+    <string name="email">correo electrónico</string>
+    <string name="manager_title">Elegir Pista</string>
+    <string name="todo">TODO</string>
+    <string name="title_activity_course_map">Elegir Pista</string>
+    <string name="done">Acabado</string>
+    <string name="rotate_title">ROTAR</string>
+    <string name="course_placement_instructions">Mantenga oprimido para pista larga</string>
+
+    <string name="new_course_title">Pista Nueva</string>
+    <string name="my_courses_title">Mi Pistas</string>
+
+    <string name="name_tag">Nombre</string>
+    <string name="address">Dirección</string>
+    <string name="add">Añadir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="cancelUppercase">CANCELAR</string>
+    <string name="welcomeBack">Bienvenido de Vuelta</string>
+
+    <string name="delete_course">Borrar Pista</string>
+    <string name="edit_course">Editar Pista</string>
+
+    <string name="searchResults">Resultados de la Búsqueda</string>
+
+</resources>

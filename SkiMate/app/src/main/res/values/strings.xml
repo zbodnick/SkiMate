@@ -10,7 +10,7 @@
     <string name="signup_button">Sign up</string>
     <string name="have_account">Already have an account? Log in</string>
     <string name="email">email</string>
-    <string name="logo">logo</string>
+    <string name="logo" translatable="false">logo</string>
     <string name="manager_title">Course Manager</string>
     <string name="todo">TODO</string>
     <string name="title_activity_course_map">Course Editor</string>
@@ -27,7 +27,7 @@
     </string-array>
 
     <!--    API Strings-->
-    <string name="openWeatherAPI">ccd0e2c49b12698e5c8b1ccf07dd6f5a</string>
+    <string name="openWeatherAPI" translatable="false">ccd0e2c49b12698e5c8b1ccf07dd6f5a</string>
     <string name="google_maps_key">AIzaSyAW7C5nCNKRjEV04ByKBVk0GPEZTgeSugA</string>
 
     <!--    Dialog Strings-->
@@ -41,11 +41,11 @@
     <string name="delete_course">Delete Course</string>
     <string name="edit_course">Edit Course</string>
 
-    <string name="tempDay">MON</string>
-    <string name="tempSpeed">24 MPH</string>
-    <string name="mphTitle">MPH</string>
-    <string name="tempDirection">South-Southeast</string>
-    <string name="tempTemp">76ºF</string>
+    <string name="tempDay" translatable="false">MON</string>
+    <string name="tempSpeed" translatable="false">24 MPH</string>
+    <string name="mphTitle" translatable="false">MPH</string>
+    <string name="tempDirection" translatable="false">South-Southeast</string>
+    <string name="tempTemp" translatable="false">76ºF</string>
 
     <string name="searchResults">Search Results</string>
 
